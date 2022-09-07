@@ -32,7 +32,7 @@
                         <a class="nav-link" href="http://localhost/GYM2/">Articulo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/GYM2/">Cliente</a>
+                        <a class="nav-link" href="http://localhost/GYM2/ClienteController/buscarClientes">Cliente</a>
                     </li>
 
                     <li class="nav-item">
