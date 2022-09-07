@@ -7,4 +7,4 @@ define('URLBASE', 'http://localhost/GYM2/');
 
 define("DBNAME","conexion_gym_db");
 define("DBUSER","root");
-define("DBPASSWORD","admin");
+define("DBPASSWORD","");
