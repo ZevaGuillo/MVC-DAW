@@ -86,11 +86,10 @@ class SuscripcionDAO{
             $data = [
                 'id' => (int)$prod->getPrd_id(),
                 'nombre' => (String)$prod->getPrd_nombre(),
-                'valor' =>  (float)$prod->getPrd_valor(),
-                'cantidad' => (int)$prod->getPrd_cantidad(),
-                'estado' => (String)$prod->getPrd_estado(),
-                'proveedor' => (int)$prod->getPrd_codigo_proveedor_producto(),
-                'fecha' =>  $prod->getPrd_fecha_actualizacion(),
+                'apellido' =>  (float)$prod->getPrd_valor(),
+                'edad' => (int)$prod->getPrd_cantidad(),
+                'genero' => (String)$prod->getPrd_estado(),
+                'plan' => (int)$prod->getPrd_codigo_proveedor_producto(),
                 ];
             $sentencia->execute($data);
             if ($sentencia->rowCount() <= 0) {
