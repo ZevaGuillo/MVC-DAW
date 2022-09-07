@@ -71,7 +71,6 @@ class ClienteDAO{
     }
 
     public function actualizar($client){
-        echo($client->getclt_id());
         try{
             $sql = "UPDATE cliente
             SET
@@ -87,11 +86,12 @@ class ClienteDAO{
             $data = [
                 'id' => (int)$client->getclt_id(),
                 'nombre' => (String)$client->getclt_nombre(),
-                'telefono' =>  (float)$client->getclt_telefono(),
-                'email' => (int)$client->getclt_email(),
+                'telefono' =>  (int)$client->getclt_telefono(),
+                'email' => (String)$client->getclt_email(),
                 'asunto' => (String)$client->getclt_asunto(),
-                'mensaje' => (int)$client->getclt_mensaje(),
+                'mensaje' => (String)$client->getclt_mensaje(),
                 ];
+                
             $sentencia->execute($data);
             if ($sentencia->rowCount() <= 0) {
                 return false;

@@ -20,6 +20,7 @@ class ClienteController extends Controller{
     
     function buscarClientePorNombre(){
         $parametro = (!empty($_POST["b"]))?htmlentities($_POST["b"]):"";
+        
         if(!empty($parametro)){
             $resultados = $this->model->buscarPorNombre($parametro);
         }else{
@@ -48,7 +49,6 @@ class ClienteController extends Controller{
             
             $Cliente->setclt_mensaje(($_POST['mensaje']));
         
-            
             $this->model->actualizar($Cliente);
 
             $resultados = $this->model->buscarClientes();

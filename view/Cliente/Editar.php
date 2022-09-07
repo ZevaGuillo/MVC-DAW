@@ -1,4 +1,4 @@
- <!--autor: MUÑOZ SOLORZANO JOHANAN NATANAEL-->
+ <!--autor: Zevallos Escalante Guillermo David-->
  <?php include_once HEADER;?>
 
  <div class="container">
@@ -21,15 +21,14 @@
                  <div class="form-group col-sm-6">
                      <label for="telefono" class="form-label">telefono</label>
                      <label for="telefono" class="form-label" id="txttelefono"><?php echo $resultado['telefono']; ?></label>
-                     <input type="text" class="form-range" min="0" max="200" id="telefono" name="telefono"
+                     <input type="text" class="form-control" id="telefono" name="telefono"
                          value="<?php echo $resultado['telefono']; ?>" >
                  </div>
 
                  <div class="form-group col-sm-6">
                      <label for="email">email</label>
-                     <input type="email" name="email" id="email"
-                         value="<?php echo $resultado['email']; ?>" class="form-control"
-                         placeholder="email en inventario" required>
+                     <input type="text" name="email" id="email" value="<?php echo $resultado['email']; ?>"
+                         class="form-control" placeholder="email Cliente" required>
                  </div>
 
                  <div class="form-group col-sm-6">
