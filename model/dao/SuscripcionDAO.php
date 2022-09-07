@@ -35,7 +35,7 @@ class SuscripcionDAO{
         return $resultados;
     }
 
-    public function insertarProducto($prod){
+    public function insertarProducto($suscrip){
         try{
             $sql = " INSERT INTO suscripcion(
             scp_nombre,
@@ -52,11 +52,11 @@ class SuscripcionDAO{
 
             $sentencia = $this->con->prepare($sql);
             $data = [
-            'nombre' =>  $prod->getScp_nombre(),
-            'apellido' =>  $prod->getScp_apellido(),
-            'edad' =>  $prod->getScp_edad(),
-            'genero' =>  $prod->getScp_genero(),
-            'plan' =>  $prod->getScp_plan(),
+            'nombre' =>  $suscrip->getScp_nombre(),
+            'apellido' =>  $suscrip->getScp_apellido(),
+            'edad' =>  $suscrip->getScp_edad(),
+            'genero' =>  $suscrip->getScp_genero(),
+            'plan' =>  $suscrip->getScp_plan(),
             ];
             $sentencia->execute($data);
             if ($sentencia->rowCount() >= 0) {
@@ -69,8 +69,8 @@ class SuscripcionDAO{
         return true;
     }
 
-    public function actualizar($prod){
-        echo($prod->getScp_id());
+    public function actualizar($suscrip){
+        echo($suscrip->getScp_id());
         try{
             $sql = "UPDATE suscripcion
             SET
@@ -84,12 +84,12 @@ class SuscripcionDAO{
             
             $sentencia = $this->con->prepare($sql);
             $data = [
-                'id' => (int)$prod->getPrd_id(),
-                'nombre' => (String)$prod->getPrd_nombre(),
-                'apellido' =>  (float)$prod->getPrd_valor(),
-                'edad' => (int)$prod->getPrd_cantidad(),
-                'genero' => (String)$prod->getPrd_estado(),
-                'plan' => (int)$prod->getPrd_codigo_proveedor_producto(),
+                'id' => (int)$suscrip->getScp_id(),
+                'nombre' => (String)$suscrip->getPrd_nombre(),
+                'apellido' =>  (String)$suscrip->getPrd_apellido(),
+                'edad' => (int)$suscrip->getScp_edad(),
+                'genero' => (String)$suscrip->getScp_genero(),
+                'plan' => (String)$suscrip->getScp_plan(),
                 ];
             $sentencia->execute($data);
             if ($sentencia->rowCount() <= 0) {
