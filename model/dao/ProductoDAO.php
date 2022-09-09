@@ -114,6 +114,13 @@ class ProductoDAO{
         }
             return true;       
     }
+
+    public function eliminar($id){
+        $sql = "DELETE FROM producto WHERE prd_id = :id";
+        $stmt = $this->con->prepare($sql);
+        $data = ['id' => $id];
+        $stmt->execute($data);
+    }
 }
 
 ?>

@@ -59,6 +59,23 @@ class ProductoController extends Controller{
         }
      }
 
+     public function eliminar(){
+        $id= $_REQUEST['id'];
+        $prod = $this->model->buscarPorId($id);
+        $this->view->setResultados($prod);
+        $this->view->mostrarEdicion('Producto/Eliminar');
+     }
+
+     public function eliminarProducto(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id= $_REQUEST['id'];
+            $this->model->eliminar($id);
+            $resultados = $this->model->buscarProductos();
+        $this->view->setResultados($resultados);
+            $this->view->mostrarVista('Producto/Buscar');
+        }
+     }
+
      public function nuevo(){
         $this->view->mostrarVista('Producto/Nuevo');
      }

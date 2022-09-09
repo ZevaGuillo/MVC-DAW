@@ -26,23 +26,27 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Home</a>
+                        <a class="nav-link active" aria-current="page"
+                            href="<?php echo constant('URLBASE')?>index/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/GYM2/">Articulo</a>
+                        <a class="nav-link" href="<?php echo constant('URLBASE')?>">Articulo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/GYM2/ClienteController/buscarClientes">Cliente</a>
+                        <a class="nav-link"
+                            href="<?php echo constant('URLBASE')?>ClienteController/buscarClientes">Cliente</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/GYM2/">Nosotros</a>
+                        <a class="nav-link" href="<?php echo constant('URLBASE')?>">Nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/GYM2/ProductoController/buscarProductos">Producto</a>
+                        <a class="nav-link"
+                            href="<?php echo constant('URLBASE')?>ProductoController/buscarProductos">Producto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/GYM2/">Suscripcion</a>
+                        <a class="nav-link"
+                            href="<?php echo constant('URLBASE')?>SuscripcionController/buscarSuscripcion">Suscripcion</a>
                     </li>
                 </ul>
             </div>
