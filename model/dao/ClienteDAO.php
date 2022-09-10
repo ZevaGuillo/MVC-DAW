@@ -102,6 +102,13 @@ class ClienteDAO{
         }
             return true;       
     }
+
+    public function eliminar($id){
+        $sql = "DELETE FROM cliente WHERE id = :id";
+        $stmt = $this->con->prepare($sql);
+        $data = ['id' => $id];
+        $stmt->execute($data);
+    }
 }
 
 ?>

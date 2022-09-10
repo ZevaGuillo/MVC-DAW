@@ -27,6 +27,7 @@
                      <th>Asunto </th>
                      <th>Mensaje </th>
                      <th></th>
+                     <th></th>
                  </thead>
                  <tbody class="tabladatos">
                      <?php
@@ -43,6 +44,11 @@
                              <a class="btn btn-primary" href="<?php echo constant('URLBASE')?>ClienteController/editarVista?id=
                                  <?php echo $fila['id']; ?>">
                                  Editar</a>
+                         </td>
+                         <td>
+                             <a class="btn btn-primary" href="<?php echo constant('URLBASE')?>ClienteController/eliminar?id=
+                                 <?php echo $fila['id']; ?>">
+                                 Eliminar</a>
                          </td>
                      </tr>
                      <?php } ?>
