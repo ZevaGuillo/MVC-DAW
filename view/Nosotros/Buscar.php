@@ -35,7 +35,6 @@
                      <tr>
                          <td><?php echo $fila['id'];?></td>
                          <td><?php echo $fila['nombre']; ?></td>
-                         <td><?php echo $fila['prd_valor']; ?></td>
                          <td><?php echo $fila['correo']; ?></td>
                          <td><?php echo $fila['pagoMensual']; ?></td>
                          <td><?php echo $fila['fecha'];?></td>

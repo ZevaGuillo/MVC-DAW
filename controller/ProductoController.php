@@ -69,9 +69,10 @@ class ProductoController extends Controller{
      public function eliminarProducto(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id= $_REQUEST['id'];
-            $this->model->eliminar($id);
-            $resultados = $this->model->buscarProductos();
-        $this->view->setResultados($resultados);
+            $prod = $this->model->buscarPorId($id);
+            $this->model->eliminar($prod.getPrd_id());
+            
+            $resultados = $this->model->buscarProductos();$this->view->setResultados($resultados);
             $this->view->mostrarVista('Producto/Buscar');
         }
      }
@@ -94,6 +95,7 @@ class ProductoController extends Controller{
             $fechaActual = new DateTime('NOW');
             $prod->setPrd_fecha_actualizacion($fechaActual->format('Y-m-d H:i:s'));
             
+
             $this->model->insertarProducto($prod);
 
             $resultados = $this->model->buscarProductos();
