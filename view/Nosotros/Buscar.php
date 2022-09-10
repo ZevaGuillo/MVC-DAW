@@ -27,6 +27,7 @@
                      <th>Fecha </th>
                      <th>Objetivos </th>
                      <th></th>
+                     <th></th>
                  </thead>
                  <tbody class="tabladatos">
                      <?php
@@ -43,6 +44,11 @@
                              <a class="btn btn-primary" href="<?php echo constant('URLBASE')?>NosotrosController/editarVista?id=
                                  <?php echo $fila['id']; ?>">
                                  Editar</a>
+                         </td>
+                         <td>
+                             <a class="btn btn-primary" href="<?php echo constant('URLBASE')?>NosotrosController/eliminar?id=
+                                 <?php echo $fila['id']; ?>">
+                                 Eliminar</a>
                          </td>
                      </tr>
                      <?php } ?>
