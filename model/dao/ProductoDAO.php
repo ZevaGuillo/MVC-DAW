@@ -1,4 +1,6 @@
 <?php
+// autor:MUÑOZ SOLORZANO JOHANAN NATANAEL
+
 require_once 'config/Conexion.php';
 
 class ProductoDAO{

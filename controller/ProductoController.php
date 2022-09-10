@@ -1,5 +1,5 @@
 <?php
-
+// autor:MUÑOZ SOLORZANO JOHANAN NATANAEL
 require_once 'model/dao/ProductoDAO.php';
 require_once 'model/dto/Producto.php';
 

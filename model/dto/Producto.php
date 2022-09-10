@@ -1,5 +1,5 @@
 <?php
-
+// autor:MUÑOZ SOLORZANO JOHANAN NATANAEL
 class Producto{
 
     private $prd_id,
