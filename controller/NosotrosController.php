@@ -83,5 +83,14 @@ class NosotrosController extends Controller{
             $this->view->mostrarVista('Nosotros/Buscar');
         } 
      }
+
+     public function eliminar(){
+        $id= $_REQUEST['id'];
+        $nosotros = $this->model->buscarPorId($id);
+        $this->model->eliminar($nosotros['id']);
+
+        $resultados = $this->model->buscarNosotros();$this->view->setResultados($resultados);
+        $this->view->mostrarVista('Nosotros/Buscar');
+     }
 }
 ?>

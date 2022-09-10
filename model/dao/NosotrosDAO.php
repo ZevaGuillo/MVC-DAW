@@ -115,6 +115,13 @@ class NosotrosDAO{
         }
             return true;       
     }
+
+    public function eliminar($id){
+        $sql = "DELETE FROM nosotros WHERE id = :id";
+        $stmt = $this->con->prepare($sql);
+        $data = ['id' => $id];
+        $stmt->execute($data);
+    }
 }
 
 ?>
