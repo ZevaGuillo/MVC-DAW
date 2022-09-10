@@ -1,5 +1,5 @@
 <?php
-
+//autor: Velez Calero Joe Fernando
 class Suscripcion{
 
     private $scp_id,

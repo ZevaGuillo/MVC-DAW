@@ -1,6 +1,6 @@
 <?php
 require_once 'config/Conexion.php';
-
+//autor: Velez Calero Joe Fernando
 class SuscripcionDAO{
 
     private $con;
@@ -10,58 +10,48 @@ class SuscripcionDAO{
     }
 
     public function buscarPorNombre($nombre){
-        $sql = "SELECT * FROM suscripcion WHERE nombre = :nombre";
-        $stmt = $this->con->prepare($sql);
-        $data = ['nombre' => $nombre];
-        $stmt->execute($data);
+        $sql = "SELECT * FROM suscripcion WHERE
+        (nombre like :b1 or apellido like :b2)";
+        $stmt = $this->con->prepare($sql);        
+        $conlike = '%' . $nombre . '%';
+        $data = array('b1' => $conlike, 'b2' => $conlike);        
+        $stmt->execute($data);        
         $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //retornar resultados
         return $resultados;
     }
-
-    public function buscarPorId($id){
-        $sql = "SELECT * FROM suscripcion WHERE id = :id";
+    public function selectOne($id) { // buscar un producto por su id
+        $sql = "select * from suscripcion where Id = :id";
+        // preparar la sentencia
         $stmt = $this->con->prepare($sql);
         $data = ['id' => $id];
+        // ejecutar la sentencia
         $stmt->execute($data);
-        $resultados = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $resultados;
+        // recuperar los datos (en caso de select)
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);// fetch retorna el primer registro
+        // retornar resultados
+        return $usuario;
     }
+    
 
-    public function buscarSuscripcion(){
-        $sql = "SELECT * FROM suscripcion;";
-        $stmt = $this->con->prepare($sql);
-        $stmt->execute();
-        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $resultados;
-    }
-
-    public function insertarProducto($suscrip){
+    public function insertarSuscripcion($sus){
         try{
-            $sql = " INSERT INTO suscripcion(
-            scp_nombre,
-            scp_apellido,
-            scp_edad,
-            scp_genero,
-            scp_plan)
-            VALUES(
-            :nombre,
-            :apellido,
-            :edad,
-            :genero,
-            :plan);";
+            $data =[
+                "nombre" => $sus->getScp_nombre(),
+                "apellido" => $sus->getScp_apellido(),
+                "edad" => $sus->getScp_edad(),
+                "genero" => $sus->getScp_genero(),
+                "plan" => $sus->getScp_plan()
+            ];
+            
+            $sql = "INSERT INTO suscripcion(nombre,apellido,edad,genero,plan) VALUES(:nombre, :apellido, :edad, :genero, :plan)";
 
             $sentencia = $this->con->prepare($sql);
-            $data = [
-            'nombre' =>  $suscrip->getScp_nombre(),
-            'apellido' =>  $suscrip->getScp_apellido(),
-            'edad' =>  $suscrip->getScp_edad(),
-            'genero' =>  $suscrip->getScp_genero(),
-            'plan' =>  $suscrip->getScp_plan(),
-            ];
+            
             $sentencia->execute($data);
             if ($sentencia->rowCount() >= 0) {
             return false;
-            } 
+            }
         }catch(Exception $e){
             echo $e->getMessage();
             return false;
@@ -69,27 +59,27 @@ class SuscripcionDAO{
         return true;
     }
 
-    public function actualizar($suscrip){
-        echo($suscrip->getScp_id());
+    public function actualizar($sus){
+        
         try{
             $sql = "UPDATE suscripcion
             SET
-            scp_nombre = :nombre,
-            scp_apellido = :apellido,
-            scp_edad = :edad,
-            scp_genero = :genero,
-            scp_plan = :plan,
-            WHERE id = :id;
-            ";
+            id = :id,
+            nombre = :nombre,
+            apellido = :apellido,
+            edad = :edad,
+            genero = :genero,
+            plan = :plan
+            WHERE id = :id";
             
             $sentencia = $this->con->prepare($sql);
             $data = [
-                'id' => (int)$suscrip->getScp_id(),
-                'nombre' => (String)$suscrip->getPrd_nombre(),
-                'apellido' =>  (String)$suscrip->getPrd_apellido(),
-                'edad' => (int)$suscrip->getScp_edad(),
-                'genero' => (String)$suscrip->getScp_genero(),
-                'plan' => (String)$suscrip->getScp_plan(),
+                "id" => (int)$sus->getScp_id(),
+                "nombre" => $sus->getScp_nombre(),
+                "apellido" => $sus->getScp_apellido(),
+                "edad" => $sus->getScp_edad(),
+                "genero" => $sus->getScp_genero(),
+                "plan" => $sus->getScp_plan()
                 ];
             $sentencia->execute($data);
             if ($sentencia->rowCount() <= 0) {
@@ -101,6 +91,25 @@ class SuscripcionDAO{
         }
             return true;       
     }
+    public function delete($sus){
+        try{
+        $data = ['id' => (int)$sus->getScp_id()];                
+
+        $sql = "delete from suscripcion where id = :id";
+        $sentencia = $this->con->prepare($sql);
+        $sentencia->execute($data);// ejecutar sentencia         
+        if ($sentencia->rowCount() <= 0) {// verificar si se inserto 
+            //rowCount permite obtner el numero de filas afectadas
+            return false;
+            }
+        }catch(Exception $e){
+            echo $e->getMessage();
+            return false;
+        }
+        
+            return true;
+        
+     }
 }
 
 ?>
