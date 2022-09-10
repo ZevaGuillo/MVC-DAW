@@ -48,7 +48,7 @@
                                  Editar</a>
                          </td>
                          <td>
-                             <a class="btn btn-primary" href="<?php echo constant('URLBASE')?>ProductoController/eliminarProducto?id=
+                             <a class="btn btn-primary" href="<?php echo constant('URLBASE')?>ProductoController/eliminar?id=
                                  <?php echo $fila['prd_id']; ?>">
                                  Eliminar</a>
                          </td>
