@@ -28,6 +28,7 @@
                      <th>Codigo Proveedor </th>
                      <th>Fecha </th>
                      <th></th>
+                     <th></th>
                  </thead>
                  <tbody class="tabladatos">
                      <?php
@@ -45,6 +46,12 @@
                              <a class="btn btn-primary" href="<?php echo constant('URLBASE')?>ProductoController/editarVista?id=
                                  <?php echo $fila['prd_id']; ?>">
                                  Editar</a>
+                         </td>
+                         <td>
+                             <a class="btn btn-primary" href="<?php echo constant('URLBASE')?>ProductoController/eliminar?id=
+                                 <?php echo $fila['prd_id']; ?>">
+                                 Eliminar</a>
+                         </td>
                          </td>
                      </tr>
                      <?php } ?>

@@ -17,11 +17,7 @@
                     $controlador->{$urlBase[1]}();
                 }
 
-            }else{
-                echo "<p>ERROR 440: PAGINA NO ENCONTRADA</p>";
             }
-
-            
         }
 
         private function traerRutas(){

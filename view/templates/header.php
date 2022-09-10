@@ -30,7 +30,8 @@
                             href="<?php echo constant('URLBASE')?>index/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo constant('URLBASE')?>">Articulo</a>
+                        <a class="nav-link"
+                            href="<?php echo constant('URLBASE')?>ArticuloController/buscarArticulos">Articulo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
@@ -38,7 +39,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo constant('URLBASE')?>">Nosotros</a>
+                        <a class="nav-link"
+                            href="<?php echo constant('URLBASE')?>NosotrosController/buscarNosotros">Nosotros</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"

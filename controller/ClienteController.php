@@ -79,5 +79,15 @@ class ClienteController extends Controller{
             $this->view->mostrarVista('Cliente/Buscar');
         } 
      }
+
+     public function eliminar(){
+        $id= $_REQUEST['id'];
+        $cliente = $this->model->buscarPorId($id);
+        $this->model->eliminar($cliente['id']);
+
+        $resultados = $this->model->buscarClientes();
+        $this->view->setResultados($resultados);
+        $this->view->mostrarVista('Cliente/Buscar');
+     }
 }
 ?>

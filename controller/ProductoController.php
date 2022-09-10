@@ -1,5 +1,5 @@
 <?php
-
+// autor:MUÑOZ SOLORZANO JOHANAN NATANAEL
 require_once 'model/dao/ProductoDAO.php';
 require_once 'model/dto/Producto.php';
 
@@ -62,18 +62,10 @@ class ProductoController extends Controller{
      public function eliminar(){
         $id= $_REQUEST['id'];
         $prod = $this->model->buscarPorId($id);
-        $this->view->setResultados($prod);
-        $this->view->mostrarEdicion('Producto/Eliminar');
-     }
+        $this->model->eliminar($prod['prd_id']);
 
-     public function eliminarProducto(){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $id= $_REQUEST['id'];
-            $this->model->eliminar($id);
-            $resultados = $this->model->buscarProductos();
-        $this->view->setResultados($resultados);
-            $this->view->mostrarVista('Producto/Buscar');
-        }
+        $resultados = $this->model->buscarProductos();$this->view->setResultados($resultados);
+        $this->view->mostrarVista('Producto/Buscar');
      }
 
      public function nuevo(){
@@ -94,6 +86,7 @@ class ProductoController extends Controller{
             $fechaActual = new DateTime('NOW');
             $prod->setPrd_fecha_actualizacion($fechaActual->format('Y-m-d H:i:s'));
             
+
             $this->model->insertarProducto($prod);
 
             $resultados = $this->model->buscarProductos();
