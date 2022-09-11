@@ -73,7 +73,7 @@ class ProductoDAO{
             ];
             $sentencia->execute($data);
             if ($sentencia->rowCount() >= 0) {
-            return false;
+                return false;
             }
         }catch(Exception $e){
             echo $e->getMessage();

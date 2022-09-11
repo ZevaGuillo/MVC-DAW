@@ -1,5 +1,5 @@
 <?php
-
+//autor: Chango Quinto Maitte Madeline
 class Nosotros{
 
     private $id,
@@ -12,52 +12,52 @@ class Nosotros{
 
     function __construct() {}
 
-    public function getid(){
+    public function getId(){
         return $this->id;
     }
 
-    public function setid($id){
+    public function setId($id){
         $this->id = $id;
     }
 
-    public function getnombre(){
+    public function getNombre(){
         return $this->nombre;
     }
 
-    public function setnombre($nombre){
+    public function setNombre($nombre){
         $this->nombre = $nombre;
     }
-    public function getcorreo(){
+    public function getCorreo(){
         return $this->correo;
     }
 
-    public function setcorreo($correo){
+    public function setCorreo($correo){
         $this->correo = $correo;
     }
 
-    public function getpagoMensual(){
+    public function getPagoMensual(){
         return $this->pagoMensual;
     }
 
-    public function setpagoMensual($valor){
+    public function setPagoMensual($valor){
         $this->pagoMensual = $valor;
     }
 
    
-    public function getfecha(){
+    public function getFecha(){
         return $this->fecha;
     }
 
-    public function setfecha($fecha){
+    public function setFecha($fecha){
         $this->fecha = $fecha;
     }
 
 
-    public function getobjetivos(){
+    public function getObjetivos(){
         return $this->objetivos;
     }
 
-    public function setobjetivos($objetivos){
+    public function setObjetivos($objetivos){
         $this->objetivos= $objetivos;
     }
 

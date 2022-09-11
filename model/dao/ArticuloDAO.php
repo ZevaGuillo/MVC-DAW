@@ -1,8 +1,7 @@
 <?php
-//autor: Chango Quinto Maitte Madeline
 require_once 'config/Conexion.php';
 
-class NosotrosDAO{
+class ArticuloDAO{
 
     private $con;
 
@@ -11,7 +10,7 @@ class NosotrosDAO{
     }
 
     public function buscarPorNombre($nombre){
-        $sql = "SELECT * FROM nosotros WHERE nombre = :nombre";
+        $sql = "SELECT * FROM articulos WHERE art_nombre = :nombre";
         $stmt = $this->con->prepare($sql);
         $data = ['nombre' => $nombre];
         $stmt->execute($data);
@@ -20,7 +19,7 @@ class NosotrosDAO{
     }
 
     public function buscarPorId($id){
-        $sql = "SELECT * FROM nosotros WHERE id = :id";
+        $sql = "SELECT * FROM articulos WHERE art_id = :id";
         $stmt = $this->con->prepare($sql);
         $data = ['id' => $id];
         $stmt->execute($data);
@@ -28,48 +27,51 @@ class NosotrosDAO{
         return $resultados;
     }
 
-    public function buscarCorreo(){
-        $sql = "SELECT * FROM nosotros;";
+    public function buscarArticulos(){
+        $sql = "SELECT * FROM articulos;";
         $stmt = $this->con->prepare($sql);
         $stmt->execute();
         $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $resultados;
     }
-    public function buscarNosotros(){
-        $sql = "SELECT * FROM nosotros;";
-        $stmt = $this->con->prepare($sql);
-        $stmt->execute();
-        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $resultados;
-    }
-    
 
-    public function insertarNosotros($nos){
+    public function buscarProveedores(){
+        $sql = "SELECT * FROM proveedores;";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $resultados;
+    }
+
+    public function insertarArticulo($art){
         try{
-            $sql = " INSERT INTO nosotros(
-           nombre,
-           correo,
-            pagoMensual,
-            fecha,
-            objetivos)
+            $sql = " INSERT INTO articulos(
+            art_nombre,
+            art_valor,
+            art_cantidad,
+            art_descripcion,
+            art_marca,
+            art_fecha_actualizacion)
             VALUES(
             :nombre,
-            :correo,
             :valor,
-            :fecha,
-            :objetivos);";
-            
+            :cantidad,
+            :descripcion,
+            :marca,
+            :fecha);";
+
             $sentencia = $this->con->prepare($sql);
             $data = [
-            'nombre' =>  $nos->getNombre(),
-            'correo' =>  $nos->getCorreo(),
-            'valor' =>  $nos->getPagoMensual(),
-            'fecha' =>  $nos->getFecha(),
-            'objetivos' => $nos->getObjetivos(),
+            'nombre' =>  $art->getArt_nombre(),
+            'valor' =>  $art->getArt_valor(),
+            'cantidad' =>  $art->getArt_cantidad(),
+            'descripcion' =>  $art->getArt_descripcion(),
+            'marca' =>  $art->getArt_marca(),
+            'fecha' =>  $art->getArt_fecha_actualizacion(),
             ];
             $sentencia->execute($data);
             if ($sentencia->rowCount() >= 0) {
-                return false;
+            return false;
             }
         }catch(Exception $e){
             echo $e->getMessage();
@@ -78,29 +80,29 @@ class NosotrosDAO{
         return true;
     }
 
-    public function actualizar($nos){
-        echo($nos->getid());
+    public function actualizar($art){
+        echo($art->getArt_id());
         try{
-            $sql = "UPDATE nosotros
+            $sql = "UPDATE articulos
             SET
-           nombre = :nombre,
-            correo = :correo,
-            pagoMensual= :valor,
-            fecha = :fecha,
-            objetivos= :objetivos
-            
-            WHERE id = :id;
+            art_nombre = :nombre,
+            art_valor = :valor,
+            art_cantidad = :cantidad,
+            art_descripcion = :descripcion,
+            art_marca = :marca,
+            art_fecha_actualizacion = :fecha
+            WHERE art_id = :id;
             ";
             
             $sentencia = $this->con->prepare($sql);
             $data = [
-                'id' => (int)$nos->getid(),
-                'nombre' => (String)$nos->getnombre(),
-                'correo' => (String)$nos->getcorreo(),
-                'valor' =>  (float)$nos->getpagoMensual(),
-                'fecha' =>  $nos->getfecha(),
-                'objetivos' => (String)$nos->getobjetivos(),
-            
+                'id' => (int)$art->getArt_id(),
+                'nombre' => (String)$art->getArt_nombre(),
+                'valor' =>  (float)$art->getArt_valor(),
+                'cantidad' => (int)$art->getArt_cantidad(),
+                'descripcion' => (String)$art->getArt_descripcion(),
+                'marca' => (String)$art->getArt_marca(),
+                'fecha' =>  $art->getArt_fecha_actualizacion(),
                 ];
             $sentencia->execute($data);
             if ($sentencia->rowCount() <= 0) {
@@ -114,7 +116,7 @@ class NosotrosDAO{
     }
 
     public function eliminar($id){
-        $sql = "DELETE FROM nosotros WHERE id = :id";
+        $sql = "DELETE FROM articulos WHERE art_id = :id";
         $stmt = $this->con->prepare($sql);
         $data = ['id' => $id];
         $stmt->execute($data);

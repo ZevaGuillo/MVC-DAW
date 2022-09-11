@@ -25,16 +25,16 @@
 
                  <div class="form-group col-sm-6">
                      <label for="valor" class="form-label">Pago Mensual</label>
-                     <label for="valor" class="form-label" id="txtValor"><?php echo $resultado['pagoMensual']; ?></label>
+                     <label for="valor" class="form-label"
+                         id="txtValor"><?php echo $resultado['pagoMensual']; ?></label>
                      <input type="range" class="form-range" min="0" max="100" id="valor" name="valor"
                          value="<?php echo $resultado['pagoMensual']; ?>" onchange="changeValue(this.value)">
                  </div>
 
-
                  <div class="form-check">
                      <label>objetivos</label>
                      <input class="form-check-input" type="radio" name="objetivos" id="objetivos"
-                         value="Adelgazar">Adelgazar></br>
+                         value="Adelgazar">Adelgazar</br>
                      <input class="form-check-input" type="radio" name="objetivos" id="objetivos"
                          value="AumentoMasaMuscular">Aumento de Masa Muscular</br>
                      <input class="form-check-input" type="radio" name="objetivos" id="objetivos"

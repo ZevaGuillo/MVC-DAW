@@ -3,7 +3,7 @@
 
  <div class="container">
      <div class="card card-body">
-         <form action="<?php echo constant('URLBASE')?>ProductoController/nuevoProducto" method="POST"
+         <form action="<?php echo constant('URLBASE')?>NosotrosController/nuevoNosotros" method="POST"
              name="formProdNuevo" id="formProdNuevo">
              <div class="form-row">
                  <div class="form-group col-sm-6">
@@ -30,13 +30,13 @@
                          placeholder="fecha de pago del cliente" required>
                  </div>
 
-              
-
                  <div class="form-check">
-                 <label>Cuales son sus objetivos en el GYM:</label>
+                     <label>Cuales son sus objetivos en el GYM:</label>
                      <input class="form-check-input" type="radio" name="objetivos" value="Adelgazar">Adelgazar</br>
-                     <input class="form-check-input" type="radio" name="objetivos" value="Aumento de Masa Muscular">Aumento de Masa Muscular</br>
-                     <input class="form-check-input" type="radio" name="objetivos" value="Tonificación">Tonificación</br>
+                     <input class="form-check-input" type="radio" name="objetivos"
+                         value="Aumento de Masa Muscular">Aumento de Masa Muscular</br>
+                     <input class="form-check-input" type="radio" name="objetivos"
+                         value="Tonificación">Tonificación</br>
                  </div>
 
                  <div class="form-group mx-auto">

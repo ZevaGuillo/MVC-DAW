@@ -1,8 +1,8 @@
 <?php
+//autor: Chango Quinto Maitte Madeline
 
 require_once 'model/dao/NosotrosDAO.php';
 require_once 'model/dto/Nosotros.php';
-
 class NosotrosController extends Controller{
 
     private $model;
@@ -65,7 +65,6 @@ class NosotrosController extends Controller{
      public function nuevoNosotros (){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $nos = new Nosotros ();
-            
             
             $nos->setnombre(htmlentities($_POST['nombre']));
             $nos->setcorreo(htmlentities($_POST['correo']));

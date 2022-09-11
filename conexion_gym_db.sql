@@ -16,31 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `articulo`
+-- Table structure for table `articulos`
 --
 
-DROP TABLE IF EXISTS `articulo`;
+DROP TABLE IF EXISTS `articulos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `articulo` (
-  `id` int NOT NULL,
-  `art_nombre` varchar(25) DEFAULT NULL,
-  `nombre` varchar(25) DEFAULT NULL,
-  `apellido` varchar(25) DEFAULT NULL,
-  `cedula` int DEFAULT NULL,
-  `correo` varchar(25) DEFAULT NULL,
-  `direccion` varchar(25) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `articulos` (
+  `art_id` int NOT NULL AUTO_INCREMENT,
+  `art_nombre` varchar(45) DEFAULT NULL,
+  `art_valor` float DEFAULT NULL,
+  `art_cantidad` int DEFAULT NULL,
+  `art_descripcion` varchar(300) DEFAULT NULL,
+  `art_marca` varchar(11) DEFAULT NULL,
+  `art_fecha_actualizacion` date DEFAULT NULL,
+  PRIMARY KEY (`art_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `articulo`
+-- Dumping data for table `articulos`
 --
 
-LOCK TABLES `articulo` WRITE;
-/*!40000 ALTER TABLE `articulo` DISABLE KEYS */;
-INSERT INTO `articulo` VALUES (2,'mancuerna','Fernando','FDFFFSDF',955188941,'nandocse','dsdsddsdsds'),(3,'pesarusa','Fernando','FDFFFSDF',0,'asasaasasa','dsdsddsdsds'),(4,'mancuerna','FSSFSDFS','Marcillo',955188941,'nandocse','dsdsddsdsds'),(5,'mancuerna','FSSFSDFS','Marcillo',955188941,'nandocse','dsdsddsdsds'),(7,'pesarusa','Fernando','Marcillo',909676751,'nandocse','GALLEGOS LARA'),(8,'cuerda','Fernando','Marcillo',0,'asasaasasa','GALLEGOS LARA'),(9,'mancuerna','Fernando','Marcillo',955188941,'nandocse','GALLEGOS LARA'),(10,'mancuerna','Fernando','Marcillo',955188941,'nandocse','GALLEGOS LARA'),(11,'mancuerna','Fernando','Marcillo',0,'asasaasasa','dsdsddsdsds'),(12,'mancuerna','Fernando','Marcillo',955188941,'asasaasasa','dsdsddsdsds'),(13,'mancuerna','Fernando','Marcillo',955188941,'asasaasasa','dsdsddsdsds'),(14,'mancuerna','Fernando','Marcillo',0,'nandocse','GALLEGOS LARA'),(15,'mancuerna','FSSFSDFS','Marcillo',955188941,'nandocse','dsdsddsdsds'),(16,'mancuerna','Fernando','Marcillo',955188941,'asasaasasa','dsdsddsdsds'),(17,'mancuerna','Fernando','FDFFFSDF',955188941,'asasaasasa','dsdsddsdsds'),(18,'mancuerna','FSSFSDFS','Marcillo',955188941,'asasaasasa','GALLEGOS LARA'),(19,'mancuerna','FSSFSDFS','Marcillo',0,'nandocse','dsdsddsdsds'),(20,'mancuerna','FSSFSDFS','Marcillo',955188941,'nandocse','dsdsddsdsds'),(21,'mancuerna','FSSFSDFS','Marcillo',955188941,'nandocse','dsdsddsdsds'),(22,'mancuerna','reteterteter','trtertertrtr',0,'rtrtertretret','tertetrtertret'),(0,'mancuerna','PACMAN','asdf',2134,'sf','sdf');
-/*!40000 ALTER TABLE `articulo` ENABLE KEYS */;
+LOCK TABLES `articulos` WRITE;
+/*!40000 ALTER TABLE `articulos` DISABLE KEYS */;
+INSERT INTO `articulos` VALUES (17,'CAMINADORA',2000,5,'rrr','SYF','2022-09-11'),(18,'PESA',200,10,'eer','SYF','2022-09-10'),(19,'MANCUERNA',100000,123,'Pa que alces','TAURUS','2022-09-11');
+/*!40000 ALTER TABLE `articulos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -58,7 +59,7 @@ CREATE TABLE `cliente` (
   `asunto` varchar(100) NOT NULL,
   `mensaje` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +68,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'guillermo',9444,'guillo@gmail.com','Prueba ','quiero probar esto'),(3,'David ',434543,'guielrmo@g.com','Comer','Comer rikco');
+INSERT INTO `cliente` VALUES (3,'David ',434543,'guielrmo@g.com','Comer','Comer rikco');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +87,7 @@ CREATE TABLE `nosotros` (
   `fecha` date NOT NULL,
   `objetivos` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +96,6 @@ CREATE TABLE `nosotros` (
 
 LOCK TABLES `nosotros` WRITE;
 /*!40000 ALTER TABLE `nosotros` DISABLE KEYS */;
-INSERT INTO `nosotros` VALUES (1,'Natanael','johanan.munozs@ug.edu.ec',60,'2022-12-30','Tonificaci&oacute;n'),(9999,'Natanael','johanan.munozs@ug.edu.ec',60,'2022-12-30','Tonificaci&oacute;n');
 /*!40000 ALTER TABLE `nosotros` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +117,7 @@ CREATE TABLE `producto` (
   PRIMARY KEY (`prd_id`),
   KEY `prv_id_idx` (`prd_codigo_proveedor_producto`),
   CONSTRAINT `prv_id` FOREIGN KEY (`prd_codigo_proveedor_producto`) REFERENCES `proveedores` (`prv_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (2,'Joe',104,11,'11',200,'2022-09-06'),(5,'gym',200,6,'6',200,'2022-09-06'),(6,'Xiaomi Redmi Note 10 Pro',200,122,'122',200,'2022-09-06'),(7,'Xiaomi Redmi Note 10 Pro',200,122,'122',200,'2022-09-06'),(8,'Xiaomi Redmi Note 10 Pro',200,122,'122',200,'2022-09-06'),(9,'sadas',1,123,'123',100,'2022-09-06'),(10,'sadas',1,123,'123',100,'2022-09-06'),(11,'torti',97,900,'900',200,'2022-09-06'),(12,'torti',97,900,'900',200,'2022-09-06');
+INSERT INTO `producto` VALUES (14,'Whey Protein',125,5,'5',200,'2022-09-10'),(15,'Whey Protein',125,5,'5',200,'2022-09-10');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,6 +155,30 @@ INSERT INTO `proveedores` VALUES (100,'Natanael'),(200,'NC_CODE');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `rol`
+--
+
+DROP TABLE IF EXISTS `rol`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rol` (
+  `rol_id` int NOT NULL AUTO_INCREMENT,
+  `rol_descripcion` varchar(45) NOT NULL,
+  PRIMARY KEY (`rol_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rol`
+--
+
+LOCK TABLES `rol` WRITE;
+/*!40000 ALTER TABLE `rol` DISABLE KEYS */;
+INSERT INTO `rol` VALUES (1,'ADMIN'),(2,'Vendedor'),(3,'NORMAL'),(4,'BANEADO');
+/*!40000 ALTER TABLE `rol` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `suscripcion`
 --
 
@@ -169,7 +193,7 @@ CREATE TABLE `suscripcion` (
   `genero` varchar(60) NOT NULL,
   `plan` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,6 +205,34 @@ LOCK TABLES `suscripcion` WRITE;
 INSERT INTO `suscripcion` VALUES (1,'Joe','0',21,'Masculino','MENSUAL'),(2,'Joe','Velez',21,'Masculino','ANUAL');
 /*!40000 ALTER TABLE `suscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `srs_id` int NOT NULL AUTO_INCREMENT,
+  `srs_nombre_usuario` varchar(45) DEFAULT NULL,
+  `srs_clave` varchar(45) DEFAULT NULL,
+  `srs_rol_fk` int DEFAULT NULL,
+  PRIMARY KEY (`srs_id`),
+  KEY `rol_fk_idx` (`srs_rol_fk`),
+  CONSTRAINT `rol_fk` FOREIGN KEY (`srs_rol_fk`) REFERENCES `rol` (`rol_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'NATANAEL','jnms',1),(2,'JOE','joe',4),(3,'Maitte','maitte',3),(4,'fernando','fernando',2);
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -191,4 +243,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-06  8:16:31
+-- Dump completed on 2022-09-10 19:53:04
