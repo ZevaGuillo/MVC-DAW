@@ -8,7 +8,6 @@ class Nosotros{
       $pagoMensual,
       $fecha,
       $objetivos;
-    
 
     function __construct() {}
 

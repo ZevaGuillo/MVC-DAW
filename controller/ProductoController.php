@@ -30,10 +30,12 @@ class ProductoController extends Controller{
     }
 
     public function editarVista(){
-        $id= $_REQUEST['id']; 
-        $prod = $this->model->buscarPorId($id);
-        $this->view->setResultados($prod);
-        $this->view->mostrarEdicion('Producto/Editar');
+        $id= $_REQUEST['id'];
+        if(!empty($id)){
+            $prod = $this->model->buscarPorId($id);
+            $this->view->setResultados($prod);
+            $this->view->mostrarEdicion('Producto/Editar');
+        }
      }
 
      public function editarProducto(){
@@ -64,7 +66,8 @@ class ProductoController extends Controller{
         $prod = $this->model->buscarPorId($id);
         $this->model->eliminar($prod['prd_id']);
 
-        $resultados = $this->model->buscarProductos();$this->view->setResultados($resultados);
+        $resultados = $this->model->buscarProductos();
+        $this->view->setResultados($resultados);
         $this->view->mostrarVista('Producto/Buscar');
      }
 
@@ -85,7 +88,6 @@ class ProductoController extends Controller{
            
             $fechaActual = new DateTime('NOW');
             $prod->setPrd_fecha_actualizacion($fechaActual->format('Y-m-d H:i:s'));
-            
 
             $this->model->insertarProducto($prod);
 

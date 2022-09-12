@@ -6,7 +6,6 @@
             $urlBase = rtrim($urlBase, '/');
             $urlBase = explode('/', $urlBase);
 
-
             $controlador = "controller/" . $urlBase[0] . ".php";
 
             if(file_exists($controlador)){
