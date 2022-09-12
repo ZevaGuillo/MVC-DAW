@@ -9,7 +9,7 @@
                  <div class="form-group col-sm-6">
                      <label for="codigo">Nombre</label>
                      <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre del producto"
-                         autofocus="" required />
+                         autofocus="" />
                  </div>
 
                  <div class="form-group col-sm-6">
@@ -22,7 +22,7 @@
                  <div class="form-group col-sm-6">
                      <label for="cantidad">Cantidad</label>
                      <input type="Number" name="cantidad" id="cantidad" class="form-control"
-                         placeholder="Cantidad en el inventario" required>
+                         placeholder="Cantidad en el inventario">
                  </div>
 
                  <div class="form-group col-sm-6">
@@ -35,12 +35,12 @@
 
                  <div class="form-check">
                      <h2>Estados</h2>
-                     <label><input class="form-check-input" type="radio" name="estado" value="1">Disponible</label></br>
-                     <label><input class="form-check-input" type="radio" name="estado" value="0">Agotado</label>
+                     <label><input class="form-check-input" type="radio" id="estado" name="estado" value="1">Disponible</label></br>
+                     <label><input class="form-check-input" type="radio" id="estado" name="estado" value="0">Agotado</label>
                  </div>
 
                  <div class="form-group mx-auto">
-                     <button type="submit" class="btn btn-primary">Guardar</button>
+                     <button type="button" ONCLICK="validarFormularios()" class="btn btn-primary">Guardar</button>
 
                      <a href="<?php echo constant('URLBASE')?>ProductoController/buscarProductos"
                          class="btn btn-primary">
@@ -56,6 +56,36 @@
 function changeValue(newColor) {
     var valor = document.getElementById('valor').value;
     document.getElementById('txtValor').innerHTML = valor;
+}
+
+function validarFormularios(){
+    var valorConfirm = confirm('Esta seguro de modificar el producto?');
+    if(valorConfirm){
+        var campoNombre = document.querySelector("#nombre").value;
+        var campoValor = document.querySelector("#valor").value;
+        var campoCantidad = document.querySelector("#cantidad").value;
+        var campoEstado = validarRadio();
+
+        if(campoCantidad < 0){
+            alert("No debe haber valores negativos");
+        }else if(!campoNombre || campoValor != 0
+            || (campoEstado != 0 || campoEstado != 1)){
+            document.forms.namedItem('formProdNuevo').submit();
+        }else{
+            alert("CAMPOS VACIOS");
+        }
+    }
+}
+
+function validarRadio(){
+    var campoRadio = document.querySelectorAll("#estado");
+    console.log(campoRadio);
+    for (i = 0; i < campoRadio.length; i++){
+        if (campoRadio[i].checked) {
+            break;
+        }
+    }
+    return seleccionado = campoRadio[i].value;
 }
  </script>
 

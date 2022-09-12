@@ -52,8 +52,5 @@ class Usuarios{
         }
         return NULL;
     }
-
-    
 }
-
 ?>

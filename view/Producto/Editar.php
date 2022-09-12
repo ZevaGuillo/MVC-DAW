@@ -15,7 +15,7 @@
                  <div class="form-group col-sm-6">
                      <label for="nombre">Nombre</label>
                      <input type="text" name="nombre" id="nombre" value="<?php echo $resultado['prd_nombre']; ?>"
-                         class="form-control" placeholder="nombre producto" required>
+                         class="form-control" placeholder="nombre producto">
                  </div>
 
                  <div class="form-group col-sm-6">
@@ -29,7 +29,7 @@
                      <label for="cantidad">Cantidad</label>
                      <input type="Number" name="cantidad" id="cantidad"
                          value="<?php echo $resultado['prd_cantidad']; ?>" class="form-control"
-                         placeholder="Cantidad en inventario" required>
+                         placeholder="Cantidad en inventario">
                  </div>
 
                  <div class="form-check">
@@ -56,8 +56,8 @@
                  </div>
 
                  <div class="form-group mx-auto">
-                     <button type="submit" class="btn btn-primary"
-                         onclick="if (!confirm('Esta seguro de modificar el producto?')) return false;">Guardar</button>
+                     <button type="button" class="btn btn-primary"
+                         onclick="validarFormularios()">Guardar</button>
                      <a href="<?php echo constant('URLBASE')?>ProductoController/buscarProductos"
                          class="btn btn-primary">Cancelar</a>
                  </div>
@@ -67,10 +67,39 @@
      </div>
  </div>
  <script>
-function changeValue(newColor) {
-    var valor = document.getElementById('valor').value;
-    document.getElementById('txtValor').innerHTML = valor;
-}
+     function changeValue(newColor) {
+         var valor = document.getElementById('valor').value;
+         document.getElementById('txtValor').innerHTML = valor;
+     }
+
+    function validarFormularios(){
+        var valorConfirm = confirm('Esta seguro de modificar el producto?');
+        if(valorConfirm){
+            var campoNombre = document.querySelector("#nombre").value;
+            var campoValor = document.querySelector("#valor").value;
+            var campoCantidad = document.querySelector("#cantidad").value;
+            var campoEstado = validarRadio();
+
+            if(campoCantidad < 0){
+                alert("No debe haber valores negativos");
+            }else if(!campoNombre || campoValor != 0
+                || (campoEstado != 0 || campoEstado != 1)){
+                document.forms.namedItem('formProdNuevo').submit();
+            }else{
+                alert("CAMPOS VACIOS");
+            }
+        }
+    }
+
+    function validarRadio(){
+        var campoRadio = document.querySelectorAll("#estado");
+        for (i = 0; i < campoRadio.length; i++){
+            if (campoRadio[i].checked) {
+                break;
+            }
+        }
+        return seleccionado = campoRadio[i].value
+    }
  </script>
  <?php 
 ?>
