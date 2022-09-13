@@ -53,6 +53,10 @@
                         <a class="nav-link"
                             href="<?php echo constant('URLBASE')?>SuscripcionController/buscarSuscripcion">Suscripcion</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="<?php echo constant('URLBASE')?>LoginController/login">Iniciar sesion</a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <?php
 
-require_once 'model/dao/LoginDAO.php';
-require_once 'model/dto/Login.php';
+require_once 'model/dao/UsuarioDAO.php';
+require_once 'model/dto/Usuarios.php';
 
 class LoginController extends Controller{
 
@@ -11,12 +11,16 @@ class LoginController extends Controller{
         parent::__construct();
         $this->model = new UsuarioDAO();
     }
+
+    function login(){
+        $this->view->mostrarVista("autenticacion/Login");
+    }
     
     function validarUsuario(){
         $method = $_SERVER['REQUEST_METHOD'];
         if($method === 'POST') {
             $usuarioExiste = $this->model->validarUsuario( $_POST['usuario'],  $_POST['contrasena']);
-            if($usuarioExiste){
+            if($usuarioExiste != null){
                 session_start();
 
                 $_SESSION['srs_id'] = $usuarioExiste->getSrs_id();
@@ -24,9 +28,9 @@ class LoginController extends Controller{
                 $_SESSION['srs_clave'] = $usuarioExiste->getSrs_clave();
                 $_SESSION['srs_rol_fk'] = $usuarioExiste->getSrs_rol_fk();
 
-                $this->view->mostrarVista();
-            }else{
+                print ($_SESSION['srs_rol_fk']);
 
+                $this->view->mostrarVista("Articulos/Buscar");
             }
         }
     }
