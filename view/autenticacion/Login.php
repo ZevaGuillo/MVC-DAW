@@ -25,7 +25,6 @@
  </div>
  <script>
      function validarFormulario(){
-         var valorConfirm = confirm('Desea ingresar al sistema?');
          if(valorConfirm){
              var campoNombre = document.querySelector("#usuario").value;
              var campoContrasena = document.querySelector("#contrasena").value;

@@ -15,16 +15,7 @@
                 if(isset($urlBase[1])){
                     $controlador->{$urlBase[1]}();
                 }
-
             }
         }
-
-        private function traerRutas(){
-            $urlBase = $_GET['url'];
-            $urlBase = rtrim($urlBase, '/');
-            $urlBase = explode('/', $urlBase);
-            var_dump($urlBase);
-        }
-
     }
 ?>

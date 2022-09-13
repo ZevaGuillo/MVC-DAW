@@ -20,8 +20,6 @@ class View{
     }
 
     function mostrarIndex(){
-        $nombre = $this->getNombre();
-        $rol = $this->getRol();
         header("Location: http://localhost/MVC-DAW/index/");
     }
 
