@@ -1,6 +1,6 @@
  <!--autor: MUÑOZ SOLORZANO JOHANAN NATANAEL-->
  <?php include_once HEADER;?>
- <main>
+ <main style="height: 60vh">
      <div class="row">
          <div class="col-sm-6">
              <form action="<?php echo constant('URLBASE')?>ProductoController/buscarProductoPorNombre" method="POST">

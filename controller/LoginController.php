@@ -29,8 +29,10 @@ class LoginController extends Controller{
                 $_SESSION['srs_rol_fk'] = $usuarioExiste->getSrs_rol_fk();
 
                 print ($_SESSION['srs_rol_fk']);
-
-                $this->view->mostrarVista("Articulos/Buscar");
+                $this->view->setNombre($_SESSION['srs_nombre_usuario'] );
+                $this->view->setRol($_SESSION['srs_rol_fk']);
+                $this->view->mostrarIndex();
+                //$this->view->mostrarVista("index/");
             }
         }
     }

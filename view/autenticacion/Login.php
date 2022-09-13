@@ -29,8 +29,7 @@
          if(valorConfirm){
              var campoNombre = document.querySelector("#usuario").value;
              var campoContrasena = document.querySelector("#contrasena").value;
-             console.log(campoNombre);
-             console.log(campoContrasena);
+
              if(campoNombre != "" && campoContrasena != ""){
                  document.forms.namedItem('formLogin').submit();
              }else{
