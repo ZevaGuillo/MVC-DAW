@@ -1,4 +1,4 @@
-<!-- parte final del documento-->
+<!-- autor: MUÑOZ SOLORZANO JOHANAN NATANAEL-->
     <footer class="footer">
         <div class="row">
             <div class="col-sm-4 d-flex flex-column">

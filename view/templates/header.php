@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
+    <meta name="author" content="MUÑOZ SOLORZANO NATANAEL JOHANAN">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,7 +64,11 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link"
-                                   href="<?php echo constant('URLBASE')?>LoginController/login">Iniciar sesion</a>
+                                   <?php
+                                   session_start();
+                                   $texto = ($_SESSION['srs_rol_fk'] === "NORMAL") ? "INICIAR SESION" : "CERRAR SESION";
+                                   ?>
+                                   href="<?php echo constant('URLBASE')?>LoginController/login"><?php echo $texto?></a>
                             </li>
                         </ul>
                     </div>

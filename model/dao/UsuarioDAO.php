@@ -1,4 +1,5 @@
 <?php
+// MUÑOZ SOLORZANO JOHANAN NATANAEL
 require_once 'config/Conexion.php';
 
     class UsuarioDAO{

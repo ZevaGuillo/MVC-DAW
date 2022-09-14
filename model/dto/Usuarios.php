@@ -1,5 +1,5 @@
 <?php
-
+// MUÑOZ SOLORZANO JOHANAN NATANAEL
 class Usuarios{
 
     private $srs_id,$srs_nombre_usuario, $srs_clave, $srs_rol_fk;

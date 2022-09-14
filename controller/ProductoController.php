@@ -16,20 +16,13 @@ class ProductoController extends Controller
 
     function buscarProductos()
     {
-        $modo = $_SESSION["srs_rol_fk"];
-        if ($modo == "ADMIN" || $modo == "Vendedor" || $modo == "NORMAL") {
-            $resultados = $this->model->buscarProductos();
-            $this->view->setResultados($resultados);
-            $this->view->mostrarVista('Producto/Buscar');
-        } else {
-            $this->view->mostrarIndex();
-        }
+        $resultados = $this->model->buscarProductos();
+        $this->view->setResultados($resultados);
+        $this->view->mostrarVista('Producto/Buscar');
     }
 
     function buscarProductoPorNombre()
     {
-        $modo = $_SESSION["srs_rol_fk"];
-        if ($modo == "ADMIN" || $modo == "Vendedor" || $modo == "NORMAL") {
             $parametro = (!empty($_POST["b"])) ? htmlentities($_POST["b"]) : "";
             if (!empty($parametro)) {
                 $resultados = $this->model->buscarPorNombre($parametro);
@@ -38,16 +31,15 @@ class ProductoController extends Controller
             }
             $this->view->setResultados($resultados);
             $this->view->mostrarVista('Producto/Buscar');
-        } else {
-            $this->view->mostrarIndex();
-        }
     }
 
     public function editarVista()
     {
+        session_start();
         $id = $_REQUEST['id'];
         $modo = $_SESSION["srs_rol_fk"];
-        if ($modo == "ADMIN" || $modo == "Vendedor") {
+        PRINT($modo);
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
             if (!empty($id)) {
                 $prod = $this->model->buscarPorId($id);
                 $this->view->setResultados($prod);
@@ -85,8 +77,9 @@ class ProductoController extends Controller
 
     public function eliminar()
     {
+        session_start();
         $modo = $_SESSION["srs_rol_fk"];
-        if ($modo == "ADMIN" || $modo == "Vendedor") {
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
             $id = $_REQUEST['id'];
             $prod = $this->model->buscarPorId($id);
             $this->model->eliminar($prod['prd_id']);
@@ -101,8 +94,9 @@ class ProductoController extends Controller
 
     public function nuevo()
     {
+        session_start();
         $modo = $_SESSION["srs_rol_fk"];
-        if ($modo == "ADMIN" || $modo == "Vendedor") {
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
             $this->view->mostrarVista('Producto/Nuevo');
         } else {
             $this->view->mostrarIndex();

@@ -1,4 +1,5 @@
 <?php
+// MUÑOZ SOLORZANO JOHANAN NATANAEL
 Require_once('rutas/Controller.php');
 Require_once('rutas/Model.php');
 Require_once('rutas/View.php');
@@ -13,9 +14,8 @@ $url= $_SERVER["REQUEST_URI"];
 $ruta =  "http://" . $host . $url;
 include_once HEADER;
 if($ruta == "http://localhost/MVC-DAW/index/"){
-    session_start();
     $nombre = ($_SESSION['srs_nombre_usuario'] != null) ? $_SESSION['srs_nombre_usuario'] . "," : "";
-    $mensaje = "Bienvenido $nombre a nuestro GYM";
+    $mensaje = "Bienvenido $nombre a nuestro GYM.";
     echo "<main style='height: 55vh'>
             <h1 style='text-align: center'>$mensaje</h1>
           </main>";

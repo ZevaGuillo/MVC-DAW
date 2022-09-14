@@ -1,4 +1,5 @@
 <?php
+// MUÑOZ SOLORZANO JOHANAN NATANAEL
 class Conexion {
     public static function getConexion() {
         $dsn = 'mysql:host=localhost;port=3306;dbname=' . DBNAME;
