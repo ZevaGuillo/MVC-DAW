@@ -71,10 +71,11 @@
 
      function cargarProveedores(){
          var valorBarraBusqueda = barraBusqueda.value;
-         var url = "<?php echo constant('URLBASE')?>ProductoController/buscarProductoPorNombre";
+         var url = "<?php echo constant('URLBASE')?>ProductoController/buscarProductoPorNombre?b="+valorBarraBusqueda;
+
          var xmlh = new XMLHttpRequest();
          xmlh.open('GET', url, true);
-         xmlh.send("b=" + valorBarraBusqueda);
+         xmlh.send();
          xmlh.onreadystatechange = function () {
              if (xmlh.readyState === 4 && xmlh.status === 200) {
                  var respuesta = "";

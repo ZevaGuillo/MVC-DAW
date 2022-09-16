@@ -26,11 +26,12 @@ class ProductoController extends Controller
         $parametro = (!empty($_GET["b"])) ? htmlentities($_GET["b"]) : "";
         if (!empty($parametro)) {
             $resultados = $this->model->buscarPorNombre($parametro);
+            echo json_encode($resultados);
         } else {
             $resultados = $this->model->buscarProductos();
         }
-        $this->view->setResultados($resultados);
-        $this->view->mostrarVista('Producto/Buscar');
+        //$this->view->setResultados($resultados);
+        //$this->view->mostrarVista('Producto/Buscar');
     }
 
     public function editarVista()

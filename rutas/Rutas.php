@@ -3,7 +3,7 @@
     class Rutas{
 
         function __construct(){
-            $urlBase = $_GET['url'];
+            $urlBase = isset($_GET['url']) ? $_GET['url'] : null;
             $urlBase = rtrim($urlBase, '/');
             $urlBase = explode('/', $urlBase);
 
