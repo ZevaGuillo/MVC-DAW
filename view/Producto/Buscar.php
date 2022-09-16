@@ -1,9 +1,9 @@
- <!--autor: MUÑOZ SOLORZANO JOHANAN NATANAEL-->
+<!--autor: MUÑOZ SOLORZANO JOHANAN NATANAEL-->
  <?php include_once HEADER;?>
  <main style="height: 60vh">
      <div class="row">
          <div class="col-sm-6">
-             <form action="<?php echo constant('URLBASE')?>ProductoController/buscarProductoPorNombre" method="POST">
+             <form action="<?php echo constant('URLBASE')?>ProductoController/buscarProductoPorNombre" method="GET">
                  <input type="text" name="b" id="buscarProductoPorNombre" placeholder="Buscar producto" />
                  <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>Buscar</button>
              </form>
@@ -14,6 +14,12 @@
                      <i class="fas fa-plus"></i>
                      Nuevo</button>
              </a>
+         </div>
+     </div>
+     <div class="row">
+         <div class="col-sm-6">
+             <h4>Busqueda con ajax</h4>
+             <input type="text" name="busquedaAjax" id="busquedaAjax"  placeholder="buscar..."/>
          </div>
      </div>
      <div class="contenedor">
@@ -59,4 +65,24 @@
              </table>
      </div>
  </main>
+ <script type="text/javascript">
+     var barraBusqueda = document.querySelector("#busquedaAjax");
+     barraBusqueda.addEventListener('keyup', cargarProveedores);
+
+     function cargarProveedores(){
+         var valorBarraBusqueda = barraBusqueda.value;
+         var url = "<?php echo constant('URLBASE')?>ProductoController/buscarProductoPorNombre";
+         var xmlh = new XMLHttpRequest();
+         xmlh.open('GET', url, true);
+         xmlh.send("b=" + valorBarraBusqueda);
+         xmlh.onreadystatechange = function () {
+             if (xmlh.readyState === 4 && xmlh.status === 200) {
+                 var respuesta = "";
+                 respuesta = xmlh.responseText;
+                 console.log(respuesta);
+                 //actualizar(respuesta); //actualizar cierta parte de la pagina
+             }
+         };
+     }
+ </script>
  <?php  require_once FOOTER?>

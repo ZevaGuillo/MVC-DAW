@@ -23,14 +23,14 @@ class ProductoController extends Controller
 
     function buscarProductoPorNombre()
     {
-            $parametro = (!empty($_POST["b"])) ? htmlentities($_POST["b"]) : "";
-            if (!empty($parametro)) {
-                $resultados = $this->model->buscarPorNombre($parametro);
-            } else {
-                $resultados = $this->model->buscarProductos();
-            }
-            $this->view->setResultados($resultados);
-            $this->view->mostrarVista('Producto/Buscar');
+        $parametro = (!empty($_GET["b"])) ? htmlentities($_GET["b"]) : "";
+        if (!empty($parametro)) {
+            $resultados = $this->model->buscarPorNombre($parametro);
+        } else {
+            $resultados = $this->model->buscarProductos();
+        }
+        $this->view->setResultados($resultados);
+        $this->view->mostrarVista('Producto/Buscar');
     }
 
     public function editarVista()

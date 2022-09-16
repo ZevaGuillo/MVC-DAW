@@ -1,12 +1,13 @@
 <?php
 // MUÑOZ SOLORZANO JOHANAN NATANAEL
+Require_once('config/config.php');
+require_once ('config/Sesiones.php');
 Require_once('rutas/Controller.php');
 Require_once('rutas/Model.php');
 Require_once('rutas/View.php');
 
-Require_once('config/config.php');
-
 Require_once('rutas/Rutas.php');
+
 $rutas = new Rutas();
 
 $host= $_SERVER["HTTP_HOST"];

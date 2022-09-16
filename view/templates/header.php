@@ -63,12 +63,7 @@
                                    href="<?php echo constant('URLBASE')?>SuscripcionController/buscarSuscripcion">Suscripcion</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link"
-                                   <?php
-                                   session_start();
-                                   $texto = ($_SESSION['srs_rol_fk'] === "NORMAL") ? "INICIAR SESION" : "CERRAR SESION";
-                                   ?>
-                                   href="<?php echo constant('URLBASE')?>LoginController/login"><?php echo $texto?></a>
+                                <a class="nav-link" href="<?php echo constant('URLBASE')?>LoginController/login">Iniciar sesion</a>
                             </li>
                         </ul>
                     </div>
