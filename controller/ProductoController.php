@@ -5,7 +5,6 @@ require_once 'model/dto/Producto.php';
 
 class ProductoController extends Controller
 {
-
     private $model;
 
     function __construct()
@@ -48,7 +47,7 @@ class ProductoController extends Controller
         $id = $_REQUEST['id'];
         $modo = $_SESSION["srs_rol_fk"];
         PRINT($modo);
-        if ($modo === "ADMIN" || $modo === "Vendedor" || $modo === "NORMAL") {
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
             if (!empty($id)) {
                 $prod = $this->model->buscarPorId($id);
                 $this->view->setResultados($prod);
@@ -104,7 +103,7 @@ class ProductoController extends Controller
     public function nuevo()
     {
         $modo = $_SESSION["srs_rol_fk"];
-        if ($modo === "ADMIN" || $modo === "Vendedor" || $modo === "NORMAL") {
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
             $this->view->mostrarVista('Producto/Nuevo');
         } else {
             $this->view->mostrarIndex();
@@ -133,6 +132,5 @@ class ProductoController extends Controller
             $this->view->mostrarVista('Producto/Buscar');
         }
     }
-
 }
 ?>

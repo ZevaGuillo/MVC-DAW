@@ -6,7 +6,9 @@ Require_once('rutas/Controller.php');
 Require_once('rutas/View.php');
 Require_once('rutas/Rutas.php');
 
+$sesiones = new Sesiones();
 $rutas = new Rutas();
+
 
 $host= $_SERVER["HTTP_HOST"];
 $url= $_SERVER["REQUEST_URI"];
