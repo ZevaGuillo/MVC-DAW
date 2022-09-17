@@ -27,9 +27,7 @@
 
                  <div class="form-group col-sm-6">
                      <label for="proveedor">Cambiar proveedor a:</label>
-                     <select id="proveedor" name="proveedor" class="form-control">
-                         <option value="100">NATANAEL</option>
-                         <option value="200" selected>NC_CODE</option>
+                     <select id="proveedor" name="proveedor" class="form-control" onclick="SelectProveedor()">
                      </select>
                  </div>
 
@@ -53,6 +51,35 @@
      </div>
  </div>
  <script>
+
+     function SelectProveedor(){
+         var url = "<?php echo constant('URLBASE')?>ProductoController/consultarProveedores/";
+         var request = new XMLHttpRequest();
+         request.open('GET', url, true);
+         request.send();
+         request.onreadystatechange = function () {
+             if (request.readyState == 4 && request.status == 200) {
+                 var respuesta = request.responseText;
+                 agregar(respuesta);
+             }
+         };
+     }
+
+     function agregar(respuesta){
+         var selectBox = document.querySelector('#proveedor');
+         var indice = respuesta.indexOf("<!--");
+         var cadenaExtraida = respuesta.substring(0, indice);
+         var proveedores = JSON.parse(cadenaExtraida);
+         resultados = '';
+
+         for (var i = 0; i < proveedores.length; i++) {
+             var option=document.createElement("option");
+             option.value= proveedores[i].prv_id;
+             option.text=proveedores[i].prv_nombre;
+             selectBox.appendChild(option);
+         }
+     }
+
 function changeValue(newColor) {
     var valor = document.getElementById('valor').value;
     document.getElementById('txtValor').innerHTML = valor;

@@ -34,13 +34,21 @@ class ProductoController extends Controller
         $this->view->mostrarVista('Producto/Buscar');
     }
 
+    function consultarProveedores()
+    {
+        $resultados = $this->model->buscarProveedores();
+        echo json_encode($resultados);
+
+        $this->view->setResultados($resultados);
+        $this->view->mostrarVista('Producto/Buscar');
+    }
+
     public function editarVista()
     {
-        session_start();
         $id = $_REQUEST['id'];
         $modo = $_SESSION["srs_rol_fk"];
         PRINT($modo);
-        if ($modo === "ADMIN" || $modo === "Vendedor") {
+        if ($modo === "ADMIN" || $modo === "Vendedor" || $modo === "NORMAL") {
             if (!empty($id)) {
                 $prod = $this->model->buscarPorId($id);
                 $this->view->setResultados($prod);
@@ -95,9 +103,8 @@ class ProductoController extends Controller
 
     public function nuevo()
     {
-        session_start();
         $modo = $_SESSION["srs_rol_fk"];
-        if ($modo === "ADMIN" || $modo === "Vendedor") {
+        if ($modo === "ADMIN" || $modo === "Vendedor" || $modo === "NORMAL") {
             $this->view->mostrarVista('Producto/Nuevo');
         } else {
             $this->view->mostrarIndex();

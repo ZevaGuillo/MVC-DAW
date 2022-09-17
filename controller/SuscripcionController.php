@@ -13,8 +13,8 @@ class SuscripcionController extends Controller{
     }
     function buscarSuscripcion(){
         $resultado = $this->model->buscarPorNombre("");
-        $this->view->setResultados($resultado);
-        $this->view->mostrarVista('Suscripcion/Buscar');
+        //$this->view->setResultados($resultado);
+        //$this->view->mostrarVista('Suscripcion/Buscar');
     }
     public function search(){        
         $parametro = (!empty($_POST["b"]))?htmlentities($_POST["b"]):"";           
