@@ -16,6 +16,8 @@
                 if(isset($urlBase[1])){
                     $controlador->{$urlBase[1]}();
                 }
+            }else{
+
             }
         }
     }

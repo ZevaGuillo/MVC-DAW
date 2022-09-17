@@ -80,10 +80,34 @@
              if (xmlh.readyState === 4 && xmlh.status === 200) {
                  var respuesta = "";
                  respuesta = xmlh.responseText;
-                 console.log(respuesta);
-                 //actualizar(respuesta); //actualizar cierta parte de la pagina
+                 actualizar(respuesta);
              }
          };
+     }
+
+     function actualizar(respuesta) {
+         var tbody = document.querySelector('.tabladatos');
+         var indice = respuesta.indexOf("<!--");
+         var cadenaExtraida = respuesta.substring(0, indice);
+         var productos = JSON.parse(cadenaExtraida);
+         resultados = '';
+         for (var i = 0; i < productos.length; i++) {
+             resultados += '<tr>';
+             resultados += '<td>' + productos[i].prd_id + '</td>';
+             resultados += '<td>' + productos[i].prd_nombre + '</td>';
+             resultados += '<td>' + productos[i].prd_valor + '</td>';
+             resultados += '<td>' + productos[i].prd_cantidad + '</td>';
+             resultados += '<td>' + productos[i].prd_estado + '</td>';
+             resultados += '<td>' + productos[i].prd_codigo_proveedor_producto + '</td>';
+             resultados += '<td>' + productos[i].prd_fecha_actualizacion + '</td>';
+             resultados += '<td>' +
+                 "<a href='http://localhost/MVC-DAW/ProductoController/editarVista?id="+productos[i].prd_id +
+                 "'" + "class='btn btn-primary' ><i class='fas fa-marker'></i></a>" +
+                 "<a href='http://localhost/MVC-DAW/ProductoController/eliminar?id="+productos[i].prd_id +
+                 "'" + "class='btn btn-danger' ><i class='far fa-trash-alt'></i></a>"+'</td>';
+             resultados += '</tr>';
+         }
+         tbody.innerHTML = resultados;
      }
  </script>
  <?php  require_once FOOTER?>

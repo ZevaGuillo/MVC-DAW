@@ -30,8 +30,8 @@ class ProductoController extends Controller
         } else {
             $resultados = $this->model->buscarProductos();
         }
-        //$this->view->setResultados($resultados);
-        //$this->view->mostrarVista('Producto/Buscar');
+        $this->view->setResultados($resultados);
+        $this->view->mostrarVista('Producto/Buscar');
     }
 
     public function editarVista()
