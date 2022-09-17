@@ -1,27 +1,29 @@
 <!--autor: MUÑOZ SOLORZANO JOHANAN NATANAEL-->
  <?php include_once HEADER;?>
  <main style="height: 60vh">
-     <div class="row">
-         <div class="col-sm-6">
-             <form action="<?php echo constant('URLBASE')?>ProductoController/buscarProductoPorNombre" method="GET">
-                 <input type="text" name="b" id="buscarProductoPorNombre" placeholder="Buscar producto" />
-                 <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>Buscar</button>
-             </form>
-         </div>
-         <div class="col-sm-6 d-flex flex-column align-items-end">
-             <a href="<?php echo constant('URLBASE')?>ProductoController/Nuevo">
-                 <button type="button" class="btn btn-primary">
-                     <i class="fas fa-plus"></i>
-                     Nuevo</button>
-             </a>
-         </div>
-     </div>
+
      <div class="row">
          <div class="col-sm-6">
              <h4>Busqueda con ajax</h4>
-             <input type="text" name="busquedaAjax" id="busquedaAjax"  placeholder="buscar..."/>
+             <input type="text" name="busquedaAjax" id="busquedaAjax"  placeholder="Nombre completo"/>
          </div>
      </div>
+     <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <form action="<?php echo constant('URLBASE')?>ProductoController/buscarProductoPorNombre" method="GET">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>Refrescar tabla</button>
+            </form>
+        </div>
+        <div class="col-sm-4 d-flex flex-column align-items-end">
+            <a href="<?php echo constant('URLBASE')?>ProductoController/Nuevo">
+                <button type="button" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Nuevo</button>
+            </a>
+        </div>
+    </div>
+     <br>
      <div class="contenedor">
          <table class="tabla">
              <table class="table">

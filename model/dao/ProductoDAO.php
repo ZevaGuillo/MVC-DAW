@@ -12,9 +12,10 @@ class ProductoDAO{
     }
 
     public function buscarPorNombre($nombre){
-        $sql = "SELECT * FROM producto WHERE prd_nombre = :nombre";
+        $sql = "SELECT * FROM producto WHERE prd_nombre = prd_nombre and (prd_nombre like :b1)";
         $stmt = $this->con->prepare($sql);
-        $data = ['nombre' => $nombre];
+        $conlike = '%' . $nombre . '%';
+        $data = array('b1' => $conlike);
         $stmt->execute($data);
         $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $resultados;
