@@ -13,15 +13,17 @@ class SuscripcionController extends Controller{
     }
     function buscarSuscripcion(){
         $resultado = $this->model->buscarPorNombre("");
-        //$this->view->setResultados($resultado);
-        //$this->view->mostrarVista('Suscripcion/Buscar');
-    }
-    public function search(){        
-        $parametro = (!empty($_POST["b"]))?htmlentities($_POST["b"]):"";           
-        $resultado = $this->model->buscarPorNombre($parametro);   
         $this->view->setResultados($resultado);
         $this->view->mostrarVista('Suscripcion/Buscar');
     }
+    
+    public function searchAjax() {        
+        $parametro = (!empty($_GET["b"]))?htmlentities($_GET["b"]):"";        
+        $resultados =  $this->model->buscarPorNombre($parametro);
+        echo json_encode($resultados);
+    }
+    
+    
     public function editarVista(){
         $id= $_REQUEST['id'];         
         $sus = $this->model->selectOne($id);
@@ -32,38 +34,116 @@ class SuscripcionController extends Controller{
      public function nuevo(){
         $this->view->mostrarVista('Suscripcion/Nuevo');
      }
-     public function nuevaSuscripcion(){
+     public function nuevaSuscripcion(){    
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    
-            $sus = new Suscripcion();            
+            $nombre = $apellido = $edad = $genero = $plan = "";
+            $valido = true;
+            function test_input($data)
+            {
+                $data = trim($data); //elimina espacios en blanco a ambos lados
+                $data = stripslashes($data); //eliminar barras invertidas
+                $data = htmlspecialchars($data); //convierte algunos caracteres predefinidos en entidades HTML
+                return $data;
+            }
 
-            $sus->setScp_nombre(htmlentities($_POST['nombre']));
-            $sus->setScp_apellido(htmlentities($_POST['apellido']));
-            $sus->setScp_edad(htmlentities($_POST['edad']));
-            if (htmlentities($_POST['genero'])=="Masculino"){
-                $sus->setScp_genero("Masculino");
+            if (empty($_POST["nombre"])) { // empty retorna verdadero cuando es vacio, null o no existe                
+                $valido = false;
+            } else { // empty retorna false si exsite y no esta vacio
+                $nombre = test_input($_POST["nombre"]); // funcion propia que limpia el dato enviado
+                if (!preg_match("/^[a-zA-Z-' ]*$/", $nombre)) {// ejemplo validacion contra expresion regular                
+                $valido = false;
+                }
+            }
+            if (empty($_REQUEST["apellido"])) {                
+                $valido = false;
+            } else {
+                $apellido = test_input($_REQUEST["apellido"]);
+                if (!preg_match("/^[a-zA-Z-' ]*$/", $apellido)) {                
+                $valido = false;
+                }
+            }
+            if (empty($_REQUEST["edad"])) {
+                $valido = false;
+            }
+            if (empty($_REQUEST["genero"])) {
+                $valido = false;
+            }
+            if (empty($_REQUEST["plan"])) {
+                $valido = false;
+            }
+            if(!$valido){
+                header("location:http://localhost/MVC-DAW/SuscripcionController/Nuevo");
             }else{
-                $sus->setScp_genero("Femenino");
-            }
+                        
+                $sus = new Suscripcion();            
 
-            if (htmlentities($_POST['plan'])=="Gratis"){
-                $sus->setScp_plan("Gratis");
-            }else if(htmlentities($_POST['plan'])=="Mensual"){
-                $sus->setScp_plan("Mensual");
+                $sus->setScp_nombre(htmlentities($_POST['nombre']));
+                $sus->setScp_apellido(htmlentities($_POST['apellido']));
+                $sus->setScp_edad(htmlentities($_POST['edad']));
+                if (htmlentities($_POST['genero'])=="Masculino"){
+                    $sus->setScp_genero("Masculino");
+                }else{
+                    $sus->setScp_genero("Femenino");
+                }
+
+                if (htmlentities($_POST['plan'])=="Gratis"){
+                    $sus->setScp_plan("Gratis");
+                }else if(htmlentities($_POST['plan'])=="Mensual"){
+                    $sus->setScp_plan("Mensual");
+                }
+                else{
+                    $sus->setScp_plan("Anual");
+                }                                               
+                $this->model->insertarSuscripcion($sus);
+                
+                $resultado = $this->model->buscarPorNombre("");
+                $this->view->setResultados($resultado);           
+                header("location:http://localhost/MVC-DAW/SuscripcionController/buscarSuscripcion");
             }
-            else{
-                $sus->setScp_plan("Anual");
-            }                                               
-            $this->model->insertarSuscripcion($sus);
-            
-            $resultado = $this->model->buscarPorNombre("");
-            $this->view->setResultados($resultado);           
-            header("location:http://localhost/MVC-DAW/SuscripcionController/buscarSuscripcion");
         } 
      }
 
      public function editarSuscripcion(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $nombre = $apellido = $edad = $genero = $plan = "";
+            $valido = true;
+            function test_input($data)
+            {
+                $data = trim($data); //elimina espacios en blanco a ambos lados
+                $data = stripslashes($data); //eliminar barras invertidas
+                $data = htmlspecialchars($data); //convierte algunos caracteres predefinidos en entidades HTML
+                return $data;
+            }
+
+            if (empty($_POST["nombre"])) { // empty retorna verdadero cuando es vacio, null o no existe                
+                $valido = false;
+            } else { // empty retorna false si exsite y no esta vacio
+                $nombre = test_input($_POST["nombre"]); // funcion propia que limpia el dato enviado
+                if (!preg_match("/^[a-zA-Z-' ]*$/", $nombre)) {// ejemplo validacion contra expresion regular                
+                $valido = false;
+                }
+            }
+            if (empty($_REQUEST["apellido"])) {                
+                $valido = false;
+            } else {
+                $apellido = test_input($_REQUEST["apellido"]);
+                if (!preg_match("/^[a-zA-Z-' ]*$/", $apellido)) {                
+                $valido = false;
+                }
+            }
+            if (empty($_REQUEST["edad"])) {
+                $valido = false;
+            }
+            if (empty($_REQUEST["genero"])) {
+                $valido = false;
+            }
+            if (empty($_REQUEST["plan"])) {
+                $valido = false;
+            }
+            if(!$valido){
+                $id= $_REQUEST['id'];
+                header("location:http://localhost/MVC-DAW/SuscripcionController/editarVista&id=".$id);
+            }else{
             $sus = new Suscripcion();            
             $id= $_REQUEST['id'];
 
@@ -90,6 +170,7 @@ class SuscripcionController extends Controller{
             $resultado = $this->model->buscarPorNombre("");
             $this->view->setResultados($resultado);  
             header("location:http://localhost/MVC-DAW/SuscripcionController/buscarSuscripcion");
+            }
         }
      }
      public function eliminar(){

@@ -1,5 +1,5 @@
 <?php
-
+//autor: MARCILLO FALCONES FERNANDO
 require_once 'model/dao/ArticuloDAO.php';
 require_once 'model/dto/Articulo.php';
 
@@ -16,6 +16,11 @@ class ArticuloController extends Controller{
         $resultados = $this->model->buscarArticulos();
         $this->view->setResultados($resultados);
         $this->view->mostrarVista('Articulos/Buscar');
+    }
+    public function searchAjax() {        
+        $parametro = (!empty($_GET["b"]))?htmlentities($_GET["b"]):"";        
+        $resultados =  $this->model->buscarPorNombre($parametro);
+        echo json_encode($resultados);
     }
     
     function buscarArticulosPorNombre(){
@@ -38,6 +43,58 @@ class ArticuloController extends Controller{
 
      public function editarArticulos(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $nombre = $valor = $cantidad = $descripcion = $marca = "";
+            $valido = true;
+            function test_input($data)
+            {
+                $data = trim($data); //elimina espacios en blanco a ambos lados
+                $data = stripslashes($data); //eliminar barras invertidas
+                $data = htmlspecialchars($data); //convierte algunos caracteres predefinidos en entidades HTML
+                return $data;
+            }
+            if (empty($_REQUEST["nombre"])) { 
+                $valido = false;
+            }else{
+                $nombre = test_input($_REQUEST["nombre"]);
+                if($nombre == "0"){                    
+                    $valido = false;
+                }
+            }
+            if (empty($_REQUEST["marca"])) { // empty retorna verdadero cuando es vacio, null o no existe                
+                $valido = false;
+            }else{
+                $marca = test_input($_REQUEST["marca"]);
+                if($marca == "0"){                    
+                    $valido = false;
+                }
+            }
+            if (empty($_REQUEST["cantidad"])) { // empty retorna verdadero cuando es vacio, null o no existe                
+                $valido = false;
+            }else{
+                $cantidad = test_input($_REQUEST["marca"]);
+                if($cantidad < 1){                    
+                    $valido = false;
+                }
+            }
+            if (empty($_REQUEST["descripcion"])) { // empty retorna verdadero cuando es vacio, null o no existe                
+                $valido = false;
+            }
+            if (empty($_REQUEST["cantidad"])) { // empty retorna verdadero cuando es vacio, null o no existe                
+                $valido = false;
+            }else{
+                $valor = test_input($_REQUEST["marca"]);
+                if($valor < 1){                    
+                    $valido = false;
+                }
+            }
+            if(!$valido){
+                $id= $_REQUEST['id'];
+                header("location:http://localhost/MVC-DAW/ArticuloController/editarVista&id=".$id);      
+                
+            }else{
+
+
+
             $Articulos = new Articulo();
             $Articulos->setArt_id(($_POST['id']));
             $Articulos->setArt_nombre(($_POST['nombre']));
@@ -54,6 +111,7 @@ class ArticuloController extends Controller{
             $resultados = $this->model->buscarArticulos();
             $this->view->setResultados($resultados);
             $this->view->mostrarVista('Articulos/Buscar');
+            }
         }
      }
 
@@ -71,7 +129,55 @@ class ArticuloController extends Controller{
      }
 
      public function nuevoArticulos(){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $nombre = $valor = $cantidad = $descripcion = $marca = "";
+            $valido = true;
+            function test_input($data)
+            {
+                $data = trim($data); //elimina espacios en blanco a ambos lados
+                $data = stripslashes($data); //eliminar barras invertidas
+                $data = htmlspecialchars($data); //convierte algunos caracteres predefinidos en entidades HTML
+                return $data;
+            }
+            if (empty($_REQUEST["nombre"])) { 
+                $valido = false;
+            }else{
+                $nombre = test_input($_REQUEST["nombre"]);
+                if($nombre == "0"){                    
+                    $valido = false;
+                }
+            }
+            if (empty($_REQUEST["marca"])) { // empty retorna verdadero cuando es vacio, null o no existe                
+                $valido = false;
+            }else{
+                $marca = test_input($_REQUEST["marca"]);
+                if($marca == "0"){                    
+                    $valido = false;
+                }
+            }
+            if (empty($_REQUEST["cantidad"])) { // empty retorna verdadero cuando es vacio, null o no existe                
+                $valido = false;
+            }else{
+                $cantidad = test_input($_REQUEST["marca"]);
+                if($cantidad < 1){                    
+                    $valido = false;
+                }
+            }
+            if (empty($_REQUEST["descripcion"])) { // empty retorna verdadero cuando es vacio, null o no existe                
+                $valido = false;
+            }
+            if (empty($_REQUEST["cantidad"])) { // empty retorna verdadero cuando es vacio, null o no existe                
+                $valido = false;
+            }else{
+                $valor = test_input($_REQUEST["marca"]);
+                if($valor < 1){                    
+                    $valido = false;
+                }
+            }
+            if(!$valido){
+                header("location:http://localhost/MVC-DAW/ArticuloController/Nuevo");
+            }else{
+
             $art = new Articulo();
             $art->setArt_nombre(htmlentities($_POST['nombre']));
             $art->setArt_valor(htmlentities($_POST['valor']));
@@ -87,6 +193,7 @@ class ArticuloController extends Controller{
             $resultados = $this->model->buscarArticulos();
             $this->view->setResultados($resultados);
             $this->view->mostrarVista('Articulos/Buscar');
+            }
         } 
      }
 }

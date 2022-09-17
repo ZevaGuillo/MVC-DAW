@@ -1,5 +1,5 @@
 <?php
-
+//autor: MARCILLO FALCONES FERNANDO
 class Articulo{
 
     private $art_id,

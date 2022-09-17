@@ -1,6 +1,6 @@
 <?php
 require_once 'config/Conexion.php';
-
+//autor: MARCILLO FALCONES FERNANDO
 class ArticuloDAO{
 
     private $con;
@@ -9,12 +9,16 @@ class ArticuloDAO{
         $this->con = Conexion::getConexion();
     }
 
+    
     public function buscarPorNombre($nombre){
-        $sql = "SELECT * FROM articulos WHERE art_nombre = :nombre";
-        $stmt = $this->con->prepare($sql);
-        $data = ['nombre' => $nombre];
-        $stmt->execute($data);
+        $sql = "SELECT * FROM articulos WHERE
+        (art_nombre like :b1 or art_valor like :b2)";
+        $stmt = $this->con->prepare($sql);        
+        $conlike = '%' . $nombre . '%';
+        $data = array('b1' => $conlike, 'b2' => $conlike);        
+        $stmt->execute($data);        
         $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //retornar resultados
         return $resultados;
     }
 
