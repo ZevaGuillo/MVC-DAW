@@ -35,84 +35,92 @@ class ArticuloController extends Controller{
     }
 
     public function editarVista(){
-        $id= $_REQUEST['id']; 
-        $art = $this->model->buscarPorId($id);
-        $this->view->setResultados($art);
-        $this->view->mostrarEdicion('Articulos/Editar');
+        $modo = $_SESSION["srs_rol_fk"];
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
+            $id= $_REQUEST['id'];
+            $art = $this->model->buscarPorId($id);
+            $this->view->setResultados($art);
+            $this->view->mostrarEdicion('Articulos/Editar');
+        }else{
+            $this->view->mostrarIndex();
+        }
      }
 
      public function editarArticulos(){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $nombre = $valor = $cantidad = $descripcion = $marca = "";
-            $valido = true;
-            function test_input($data)
-            {
-                $data = trim($data); //elimina espacios en blanco a ambos lados
-                $data = stripslashes($data); //eliminar barras invertidas
-                $data = htmlspecialchars($data); //convierte algunos caracteres predefinidos en entidades HTML
-                return $data;
-            }
-            if (empty($_REQUEST["nombre"])) { 
-                $valido = false;
-            }else{
-                $nombre = test_input($_REQUEST["nombre"]);
-                if($nombre == "0"){                    
-                    $valido = false;
-                }
-            }
-            if (empty($_REQUEST["marca"])) { // empty retorna verdadero cuando es vacio, null o no existe                
-                $valido = false;
-            }else{
-                $marca = test_input($_REQUEST["marca"]);
-                if($marca == "0"){                    
-                    $valido = false;
-                }
-            }
-            if (empty($_REQUEST["cantidad"])) { // empty retorna verdadero cuando es vacio, null o no existe                
-                $valido = false;
-            }else{
-                $cantidad = test_input($_REQUEST["marca"]);
-                if($cantidad < 1){                    
-                    $valido = false;
-                }
-            }
-            if (empty($_REQUEST["descripcion"])) { // empty retorna verdadero cuando es vacio, null o no existe                
-                $valido = false;
-            }
-            if (empty($_REQUEST["cantidad"])) { // empty retorna verdadero cuando es vacio, null o no existe                
-                $valido = false;
-            }else{
-                $valor = test_input($_REQUEST["marca"]);
-                if($valor < 1){                    
-                    $valido = false;
-                }
-            }
-            if(!$valido){
-                $id= $_REQUEST['id'];
-                header("location:http://localhost/MVC-DAW/ArticuloController/editarVista&id=".$id);      
-                
-            }else{
+         $modo = $_SESSION["srs_rol_fk"];
+         if ($modo === "ADMIN" || $modo === "Vendedor") {
+             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                 $nombre = $valor = $cantidad = $descripcion = $marca = "";
+                 $valido = true;
+                 function test_input($data)
+                 {
+                     $data = trim($data); //elimina espacios en blanco a ambos lados
+                     $data = stripslashes($data); //eliminar barras invertidas
+                     $data = htmlspecialchars($data); //convierte algunos caracteres predefinidos en entidades HTML
+                     return $data;
+                 }
+                 if (empty($_REQUEST["nombre"])) {
+                     $valido = false;
+                 }else{
+                     $nombre = test_input($_REQUEST["nombre"]);
+                     if($nombre == "0"){
+                         $valido = false;
+                     }
+                 }
+                 if (empty($_REQUEST["marca"])) { // empty retorna verdadero cuando es vacio, null o no existe
+                     $valido = false;
+                 }else{
+                     $marca = test_input($_REQUEST["marca"]);
+                     if($marca == "0"){
+                         $valido = false;
+                     }
+                 }
+                 if (empty($_REQUEST["cantidad"])) { // empty retorna verdadero cuando es vacio, null o no existe
+                     $valido = false;
+                 }else{
+                     $cantidad = test_input($_REQUEST["marca"]);
+                     if($cantidad < 1){
+                         $valido = false;
+                     }
+                 }
+                 if (empty($_REQUEST["descripcion"])) { // empty retorna verdadero cuando es vacio, null o no existe
+                     $valido = false;
+                 }
+                 if (empty($_REQUEST["cantidad"])) { // empty retorna verdadero cuando es vacio, null o no existe
+                     $valido = false;
+                 }else{
+                     $valor = test_input($_REQUEST["marca"]);
+                     if($valor < 1){
+                         $valido = false;
+                     }
+                 }
+                 if(!$valido){
+                     $id= $_REQUEST['id'];
+                     header("location:http://localhost/MVC-DAW/ArticuloController/editarVista&id=".$id);
 
+                 }else{
+                     $Articulos = new Articulo();
+                     $Articulos->setArt_id(($_POST['id']));
+                     $Articulos->setArt_nombre(($_POST['nombre']));
+                     $Articulos->setArt_valor(($_POST['valor']));
+                     $Articulos->setArt_cantidad(($_POST['cantidad']));
+                     $Articulos->setArt_descripcion(($_POST['descripcion']));
+                     $Articulos->setArt_marca(htmlentities($_POST['marca']));
 
+                     $fechaActual = new DateTime('NOW');
+                     $Articulos->setArt_fecha_actualizacion($fechaActual->format('Y-m-d H:i:s'));
 
-            $Articulos = new Articulo();
-            $Articulos->setArt_id(($_POST['id']));
-            $Articulos->setArt_nombre(($_POST['nombre']));
-            $Articulos->setArt_valor(($_POST['valor']));
-            $Articulos->setArt_cantidad(($_POST['cantidad']));
-            $Articulos->setArt_descripcion(($_POST['descripcion']));
-            $Articulos->setArt_marca(htmlentities($_POST['marca']));
-           
-            $fechaActual = new DateTime('NOW');
-            $Articulos->setArt_fecha_actualizacion($fechaActual->format('Y-m-d H:i:s'));
-            
-            $this->model->actualizar($Articulos);
+                     $this->model->actualizar($Articulos);
 
-            $resultados = $this->model->buscarArticulos();
-            $this->view->setResultados($resultados);
-            $this->view->mostrarVista('Articulos/Buscar');
-            }
-        }
+                     $resultados = $this->model->buscarArticulos();
+                     $this->view->setResultados($resultados);
+                     $this->view->mostrarVista('Articulos/Buscar');
+                 }
+             }
+         }else{
+             $this->view->mostrarIndex();
+         }
+
      }
 
      public function eliminar(){
@@ -125,7 +133,12 @@ class ArticuloController extends Controller{
      }
 
      public function nuevo(){
-        $this->view->mostrarVista('Articulos/Nuevo');
+         $modo = $_SESSION["srs_rol_fk"];
+         if ($modo === "ADMIN" || $modo === "Vendedor") {
+             $this->view->mostrarVista('Articulos/Nuevo');
+         }else{
+             $this->view->mostrarIndex();
+         }
      }
 
      public function nuevoArticulos(){
