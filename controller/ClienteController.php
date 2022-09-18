@@ -17,7 +17,7 @@ class ClienteController extends Controller{
         $this->view->setResultados($resultados);
         $this->view->mostrarVista('Cliente/Buscar');
     }
-    
+
     function buscarClientePorNombre(){
         $parametro = (!empty($_GET["b"]))?htmlentities($_GET["b"]):"";
         
