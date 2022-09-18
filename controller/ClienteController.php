@@ -31,10 +31,19 @@ class ClienteController extends Controller{
     }
 
     public function editarVista(){
-        $id= $_REQUEST['id']; 
-        $clint = $this->model->buscarPorId($id);
-        $this->view->setResultados($clint);
-        $this->view->mostrarEdicion('Cliente/Editar');
+
+        $id = $_REQUEST['id'];
+        $modo = $_SESSION["srs_rol_fk"];
+        PRINT($modo);
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
+            if (!empty($id)) {
+                $clint = $this->model->buscarPorId($id);
+                $this->view->setResultados($clint);
+                $this->view->mostrarEdicion('Cliente/Editar');
+            }
+        } else {
+            $this->view->mostrarIndex();
+        }
      }
 
      public function editarCliente(){
@@ -58,7 +67,12 @@ class ClienteController extends Controller{
      }
 
      public function nuevo(){
-        $this->view->mostrarVista('Cliente/Nuevo');
+        $modo = $_SESSION["srs_rol_fk"];
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
+            $this->view->mostrarVista('Cliente/Nuevo');
+        } else {
+            $this->view->mostrarIndex();
+        }
      }
 
      public function nuevoCliente(){
@@ -81,13 +95,21 @@ class ClienteController extends Controller{
      }
 
      public function eliminar(){
-        $id= $_REQUEST['id'];
-        $cliente = $this->model->buscarPorId($id);
-        $this->model->eliminar($cliente['id']);
 
-        $resultados = $this->model->buscarClientes();
-        $this->view->setResultados($resultados);
-        $this->view->mostrarVista('Cliente/Buscar');
+        session_start();
+        $modo = $_SESSION["srs_rol_fk"];
+        
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
+            $id= $_REQUEST['id'];
+            $cliente = $this->model->buscarPorId($id);
+            $this->model->eliminar($cliente['id']);
+    
+            $resultados = $this->model->buscarClientes();
+            $this->view->setResultados($resultados);
+            $this->view->mostrarVista('Cliente/Buscar');
+        } else {
+            $this->view->mostrarIndex();
+        }
      }
 }
 ?>
