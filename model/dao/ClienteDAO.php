@@ -55,10 +55,10 @@ class ClienteDAO{
             $sentencia = $this->con->prepare($sql);
             $data = [
                 'nombre' => (String)$client->getclt_nombre(),
-                'telefono' =>  (float)$client->getclt_telefono(),
-                'email' => (int)$client->getclt_email(),
+                'telefono' =>  (int)$client->getclt_telefono(),
+                'email' => (String)$client->getclt_email(),
                 'asunto' => (String)$client->getclt_asunto(),
-                'mensaje' => (int)$client->getclt_mensaje(),
+                'mensaje' => (String)$client->getclt_mensaje(),
                 ];
             $sentencia->execute($data);
             if ($sentencia->rowCount() >= 0) {
