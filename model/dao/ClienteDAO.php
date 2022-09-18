@@ -10,9 +10,10 @@ class ClienteDAO{
     }
 
     public function buscarPorNombre($nombre){
-        $sql = "SELECT * FROM cliente WHERE nombre = :nombre";
+        $sql = "SELECT * FROM cliente WHERE nombre = nombre and (nombre like :b1)";
         $stmt = $this->con->prepare($sql);
-        $data = ['nombre' => $nombre];
+        $conlike = '%' . $nombre . '%';
+        $data = array('b1' => $conlike);
         $stmt->execute($data);
         $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $resultados;

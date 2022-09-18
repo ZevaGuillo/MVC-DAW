@@ -19,10 +19,11 @@ class ClienteController extends Controller{
     }
     
     function buscarClientePorNombre(){
-        $parametro = (!empty($_POST["b"]))?htmlentities($_POST["b"]):"";
+        $parametro = (!empty($_GET["b"]))?htmlentities($_GET["b"]):"";
         
         if(!empty($parametro)){
             $resultados = $this->model->buscarPorNombre($parametro);
+            echo json_encode($resultados);
         }else{
             $resultados = $this->model->buscarClientes();
         }
