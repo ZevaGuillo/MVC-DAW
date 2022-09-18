@@ -19,21 +19,32 @@ class NosotrosController extends Controller{
     }
     
     function buscarNosotrosPorNombre(){
-        $parametro = (!empty($_POST["b"]))?htmlentities($_POST["b"]):"";
-        if(!empty($parametro)){
-            $resultados = $this->model->buscarPorNombre($parametro);
+        $modo = $_SESSION["srs_rol_fk"];
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
+            $parametro = (!empty($_POST["b"]))?htmlentities($_POST["b"]):"";
+            if(!empty($parametro)){
+                $resultados = $this->model->buscarPorNombre($parametro);
+            }else{
+                $resultados = $this->model->buscarNosotros();
+            }
+            $this->view->setResultados($resultados);
+            $this->view->mostrarVista('Nosotros/Buscar');
         }else{
-            $resultados = $this->model->buscarNosotros();
+            $this->view->mostrarIndex();
         }
-        $this->view->setResultados($resultados);
-        $this->view->mostrarVista('Nosotros/Buscar');
+
     }
 
     public function editarVista(){
-        $id= $_REQUEST['id']; 
-        $nos = $this->model->buscarPorId($id);
-        $this->view->setResultados($nos);
-        $this->view->mostrarEdicion('Nosotros/Editar');
+        $modo = $_SESSION["srs_rol_fk"];
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
+            $id= $_REQUEST['id'];
+            $nos = $this->model->buscarPorId($id);
+            $this->view->setResultados($nos);
+            $this->view->mostrarEdicion('Nosotros/Editar');
+        }else{
+            $this->view->mostrarIndex();
+        }
      }
 
      public function editarNosotros(){
