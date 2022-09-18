@@ -21,7 +21,6 @@ class LoginController extends Controller{
         }
 
         $this->view->mostrarVista("autenticacion/Login");
-
     }
     
     function validarUsuario(){
