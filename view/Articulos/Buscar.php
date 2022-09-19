@@ -65,7 +65,7 @@ function cargarArticulos() {
     // leer paramteros
     var bus = txtBuscar.value;
     // realizar la peticion            
-    var url = "http://localhost/MVC-DAW/ArticuloController/searchAjax&b=" + bus;
+    var url = "http://localhost/MVC-DAW/ArticuloController/searchAjax?b=" + bus;
     var xmlh = new XMLHttpRequest();
     xmlh.open("GET", url, true);
     xmlh.send();
@@ -81,7 +81,9 @@ function cargarArticulos() {
 function actualizar(respuesta) {
     // elemento a actualizar
     var tbody = document.querySelector('.tabladatos');
-    var articulos = JSON.parse(respuesta); // parse de respuesta aformato json            
+    var indice = respuesta.indexOf("<!--");
+    var cadenaExtraida = respuesta.substring(0, indice);
+    var articulos = JSON.parse(cadenaExtraida);         
 
     console.log(articulos);
     resultados = '';

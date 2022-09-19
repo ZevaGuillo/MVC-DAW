@@ -18,9 +18,15 @@ class ArticuloController extends Controller{
         $this->view->mostrarVista('Articulos/Buscar');
     }
     public function searchAjax() {        
-        $parametro = (!empty($_GET["b"]))?htmlentities($_GET["b"]):"";        
-        $resultados =  $this->model->buscarPorNombre($parametro);
-        echo json_encode($resultados);
+        $parametro = (!empty($_GET["b"])) ? htmlentities($_GET["b"]) : "";
+        if (!empty($parametro)) {
+            $resultados = $this->model->buscarPorNombre($parametro);
+            echo json_encode($resultados);
+        } else {
+            $resultados = $this->model->buscarPorNombre("");
+        }
+        $this->view->setResultados($resultados);
+        $this->view->mostrarVista('Articulos/Buscar');
     }
     
     function buscarArticulosPorNombre(){

@@ -76,7 +76,7 @@ function cargarSuscripciones() {
     // leer paramteros
     var bus = txtBuscar.value;
     // realizar la peticion            
-    var url = "http://localhost/MVC-DAW/SuscripcionController/searchAjax&b=" + bus;
+    var url = "http://localhost/MVC-DAW/SuscripcionController/searchAjax?b=" + bus;
     var xmlh = new XMLHttpRequest();
     xmlh.open("GET", url, true);
     xmlh.send();
@@ -92,8 +92,10 @@ function cargarSuscripciones() {
 function actualizar(respuesta) {
     // elemento a actualizar
     var tbody = document.querySelector('.tabladatos');
-    var suscripciones = JSON.parse(respuesta); // parse de respuesta aformato json            
-
+    var indice = respuesta.indexOf("<!--");
+    var cadenaExtraida = respuesta.substring(0, indice);
+    var suscripciones = JSON.parse(cadenaExtraida);
+              
     console.log(suscripciones);
     resultados = '';
 
