@@ -70,7 +70,13 @@ class NosotrosController extends Controller{
      }
 
      public function nuevo(){
-        $this->view->mostrarVista('Nosotros/Nuevo');
+        $modo = $_SESSION["srs_rol_fk"];
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
+            $this->view->mostrarVista('Nosotros/Nuevo');
+        } else {
+            $this->view->mostrarIndex();
+        }
+        
      }
 
      public function nuevoNosotros (){
@@ -95,12 +101,17 @@ class NosotrosController extends Controller{
      }
 
      public function eliminar(){
+        session_start();
+        $modo = $_SESSION["srs_rol_fk"];
+        if ($modo === "ADMIN" || $modo === "Vendedor") {
         $id= $_REQUEST['id'];
         $nosotros = $this->model->buscarPorId($id);
         $this->model->eliminar($nosotros['id']);
-
         $resultados = $this->model->buscarNosotros();$this->view->setResultados($resultados);
         $this->view->mostrarVista('Nosotros/Buscar');
-     }
+    } else {
+        $this->view->mostrarIndex();
+    }
+    }
 }
 ?>

@@ -11,9 +11,10 @@ class NosotrosDAO{
     }
 
     public function buscarPorNombre($nombre){
-        $sql = "SELECT * FROM nosotros WHERE nombre = :nombre";
+        $sql = "SELECT * FROM nosotros WHERE nombre = :nombre and (nombre like :b1)";
         $stmt = $this->con->prepare($sql);
-        $data = ['nombre' => $nombre];
+        $conlike = '%' . $nombre . '%';
+        $data = array('b1' => $conlike);
         $stmt->execute($data);
         $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $resultados;
@@ -114,11 +115,15 @@ class NosotrosDAO{
     }
 
     public function eliminar($id){
+        try{
         $sql = "DELETE FROM nosotros WHERE id = :id";
         $stmt = $this->con->prepare($sql);
         $data = ['id' => $id];
         $stmt->execute($data);
-    }
+    }catch(Exception $e) {
+        echo $e->getMessage();
+        return false;
 }
-
+}
+}
 ?>
